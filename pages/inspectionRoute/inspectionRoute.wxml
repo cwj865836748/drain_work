@@ -1,0 +1,4 @@
+<!--pages/inspectionRoute/inspectionRoute.wxml-->
+<navbar title="选择巡检路线">
+<map id="mapId" setting="{{mapSetting}}"></map>
+</navbar>

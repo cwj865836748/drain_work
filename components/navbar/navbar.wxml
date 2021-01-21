@@ -1,0 +1,21 @@
+<!--components/navbar/index.wxml-->
+<!--1：position:relative Or 2：position:fixed-->
+
+<view class="navbar {{navbarType==1? '':'navbarFixed'}}" style='height:{{navHeight}}px;background-color:{{headColor}};'>
+	<view style='height:{{statusBarHeight}}px;background-color:{{headColor}};' />
+	<view class="title-container" style='height:{{navHeight-statusBarHeight}}px;'>
+		<van-icon name="arrow-left" size="22px" wx:if='{{back}}' bindtap="goBack"
+			style='color:{{titleColor}};margin-left: 10px;' />
+		<van-icon name="wap-home-o" size="22px" wx:if='{{home}}' bindtap="goHome"
+			style='color:{{titleColor}};margin-left: 10px;' />
+		<slot name="icon"></slot>
+		<view class="title_head text-more-single" style='color:{{titleColor}};'>{{title}}</view>
+	</view>
+</view>
+<view wx:if="{{navbarType==1}}" class="slotContent"
+	style="height: calc(100vh - {{navHeight}}px);background:{{backgroundColor}};">
+	<slot></slot>
+</view>
+<view wx:if="{{navbarType==2}}" class="slotContent2" style="background:{{backgroundColor}};">
+	<slot></slot>
+</view>

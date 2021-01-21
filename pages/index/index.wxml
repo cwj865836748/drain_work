@@ -1,0 +1,5 @@
+<!--index.wxml-->
+<navbar title="巡检上报" navbarType="2" back="{{false}}">
+
+</navbar>
+

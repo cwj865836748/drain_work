@@ -1,0 +1,44 @@
+{
+  "pages":[
+    "pages/index/index",
+    "pages/reportProblem/reportProblem",
+    "pages/caseList/caseList",
+    "pages/caseDetail/caseDetail",
+    "pages/inspectionRoute/inspectionRoute",
+    "pages/inspectionProcess/inspectionProcess",
+    "pages/inspectionDetail/inspectionDetail",
+    "pages/inspectionList/inspectionList",
+    "pages/merchantList/merchantList",
+    "pages/merchantListForm/merchantListForm",
+    "pages/merchantListDetail/merchantListDetail"
+  ],
+  "window":{
+    "backgroundTextStyle":"light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "Weixin",
+    "navigationBarTextStyle":"black",
+    "navigationStyle":"custom"
+  },
+  "tabBar": {
+    "color": "#cccccc",
+    "selectedColor": "#49047a",
+    "borderStyle": "white",
+    "backgroundColor": "#FFFFFF",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "首页"
+      },
+      {
+        "pagePath": "pages/caseList/caseList",
+        "text": "案件"
+      },
+      {
+        "pagePath": "pages/merchantList/merchantList",
+        "text": "商户"
+      }
+    ]
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json"
+}
