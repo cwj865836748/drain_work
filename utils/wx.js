@@ -155,6 +155,22 @@ export const getLocation = (type = 'wgs84') => {
   })
 }
 /**
+ * 选择地理位置
+ * 
+ */
+export const chooseLocation = () => {
+  return new Promise((resolve, reject) => {
+    wx.chooseLocation({
+      success: (res) => {
+        resolve(res);
+      },
+      fail: (err) => {
+        reject(err);
+      }
+    })
+  })
+}
+/**
  * 打开地图选择位置。
  * @param {*} location
  * latitude，longitude
@@ -488,5 +504,20 @@ export const getImageInfo=(src)=>{
         reject(err);
       }
     });
+  })
+}
+/**
+ * 获取扫一扫
+ */
+export const scanCode=()=>{
+  return new Promise((resolve, reject) => {
+    wx.scanCode({
+      success: (result) => {
+        resolve(result);
+      },
+      fail: (err) => {
+        reject(err);
+      }
+    })
   })
 }

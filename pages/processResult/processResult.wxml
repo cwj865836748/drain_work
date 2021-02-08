@@ -1,0 +1,34 @@
+<!--pages/processResult/processResult.wxml-->
+<navbar title="提交处理结果">
+  <view class="theForm">
+    <view class="formOne">
+      <view class="formTitle">{{isForm?'巡检':'维护'}}过程描述:</view>
+      <textarea placeholder="{{isForm?'请输入巡检过程中的具体问题,处理方式,处理结果,以及后续可能出现的问题':'请输入处理过程中的具体问题,处理方式,处理结果,以及后续可能出现的问题'}}" placeholder-class="placeholderClass" bindinput="textareaInput" maxlength="150"></textarea>
+    </view>
+    <view class="formOne" style="margin-bottom:0">
+      <view class="formTitle">上传照片:</view>
+      <view class="formPicList flex-wrap">
+        <view class="formPic flex-xy-center" bindtap="uploadImage" wx:if="{{imgList.length<6}}">
+          <image class="formPicAdd" src="/image/add_pic@2x.png"></image>
+        </view>
+        <block wx:for="{{imgList}}" wx:key="index">
+          <view class="formPic">
+            <image class="formPicOne" src="{{item}}" bindtap="previewImg" data-current="{{item}}"></image>
+            <image class="formPicDel" src="/image/delete@2x.png" bindtap="delImage" data-index="{{index}}"></image>
+          </view>
+        </block>
+      </view>
+      <view class="formPicWarn">(请上传{{isForm?'巡检':'维修'}}后的图片，以及周边环境照)</view>
+    </view>
+    <view class="submitBtn flex-x-center {{isPhoneX?'safeBtn':''}}">
+      <view class="flex-xy-center" bindtap="submitForm">提交</view>
+    </view>
+  </view>
+  <van-dialog use-slot show="{{ confirmShow }}" width="345" showConfirmButton="{{false}}">
+    <view class="dialogOk flex-xy-center flex-col">
+      <image src="/image/options@2x.png"></image>
+      <view>您已成功提交处理结果!</view>
+    </view>
+    <view class="comfirmButton flex-xy-center" bindtap="comfirmOk">确定</view>
+  </van-dialog>
+</navbar>

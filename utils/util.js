@@ -19,7 +19,7 @@ const formatTime = date => {
   const minute = date.getMinutes()
   const second = date.getSeconds()
 
-  return [year, month, day].map(formatNumber).join('/') + ' ' + [hour, minute, second].map(formatNumber).join(':')
+  return [year, month, day].map(formatNumber).join('-') + ' ' + [hour, minute, second].map(formatNumber).join(':')
 }
 
 const formatNumber = n => {
@@ -27,7 +27,7 @@ const formatNumber = n => {
   return n[1] ? n : '0' + n
 }
 //获取当前位置
-const getAuth = () => {
+const getMyLocation = () => {
   return new Promise((resolve, reject) => {
     getSetting().then(re => {
       if (!re.authSetting['scope.userLocation']) {
@@ -254,12 +254,11 @@ const getPointsCenter = (points) => {
 
   const lngCenter = Math.atan2(Y, X);
   const latCenter = Math.atan2(Z, Math.sqrt(X * X + Y * Y));
-
-  return [latCenter * 180 / Math.PI, lngCenter * 180 / Math.PI];
+  return {latitude:latCenter * 180 / Math.PI,longitude:lngCenter * 180 / Math.PI};
 }
 module.exports = {
   formatTime: formatTime,
-  getAuth: getAuth,
+  getMyLocation: getMyLocation,
   wxPromisify: wxPromisify,
   isNull: isNull,
   checkPhone: checkPhone,

@@ -1,2 +1,48 @@
-<!--pages/inspectionDetail/inspectionDetail.wxml-->
-<text>pages/inspectionDetail/inspectionDetail.wxml</text>
+<!--pages/caseDetail/caseDetail.wxml-->
+<wxs src="../../wxs/filter.wxs" module="filter"/>
+<navbar title="巡检详情" backgroundColor="{{backgroundColor}}">
+  <view class="caseDetail">
+    <view class="caseDetailHead flex-x-between flex-y-center">
+        巡检编号: {{wayOne.patrolNo}}
+    </view>
+    <view class="caseDetailContent">
+      <view class="caseDetailOne">
+        <view class="caseTitle">巡检标题:</view>
+        <view class="caseStauts"> {{wayOne.wayTitle}}</view>
+      </view>
+      <view class="caseDetailOne">
+        <view class="caseTitle">巡检起始时间:</view>
+        <view class="caseStauts">{{wayOne.startTime}}</view>
+      </view>
+      <view class="caseDetailOne">
+        <view class="caseTitle">巡检总用时间:</view>
+        <view class="caseStauts">{{wayOne.duringTime}}</view>
+      </view>
+      <view class="caseDetailOne">
+        <view class="caseTitle">是否超时:</view>
+        <view class="caseStauts">{{filter.okOrNo(wayOne.duringTime)}}</view>
+      </view>
+      <view class="caseDetailOne">
+        <view class="caseTitle mapTitle">巡检路线:</view>
+        <map id="mapId" wx:if="{{markers.length}}" showLocation latitude="{{latitude}}" longitude="{{longitude}}"
+        markers="{{markers}}" polyline="{{polyline}}"></map>
+      </view>
+    </view>
+    <view class="caseDetailMsg">
+      <view class="caseDetailUp flex-y-center">
+        巡查结果:
+      </view>
+      <view class="caseDetailImgList flex-wrap">
+        <block wx:for="{{wayOne.patrolImageArray}}" wx:key="index">
+          <view class="caseDetailImg" bindtap="previewImg" data-current="{{item}}">
+            <image src="{{item}}"></image>
+          </view>
+        </block>
+      </view>
+      <view class="caseDetailOne">
+        <view class="caseTitle">文字描述:</view>
+        <view class="caseStauts">{{wayOne.resultDescribe}}</view>
+      </view>
+    </view>
+  </view>
+</navbar>

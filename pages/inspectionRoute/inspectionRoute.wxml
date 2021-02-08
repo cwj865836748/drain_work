@@ -1,4 +1,58 @@
 <!--pages/inspectionRoute/inspectionRoute.wxml-->
-<navbar title="选择巡检路线">
-<map id="mapId" setting="{{mapSetting}}"></map>
+<wxs src="../../wxs/filter.wxs" module="filter"></wxs>
+<navbar title="选择巡检路线" backgroundColor="{{backgroundColor}}">
+
+  <view class="plan">
+    <view class="chooseLine">
+      <view class="lineTitle">选择巡检路径</view>
+      <view class="lineSelect flex-y-center flex-x-between" bindtap="showSelect">
+        <text>{{wayOne.wayTitle?wayOne.wayTitle:'请选择'}}</text>
+        <image src="/image/down@2x.png"></image>
+      </view>
+      <view class="formSelect" wx:if="{{wayShow}}">
+        <block wx:for="{{wayList}}" wx:key="index">
+          <view class="formSelectOne flex-y-center {{wayOne.wayTitle==item.wayTitle?'formSelectOneActive':''}}"
+            bindtap="toSelect" data-way="{{item}}">{{item.wayTitle}}</view>
+        </block>
+      </view>
+    </view>
+    <view class="chooseLine">
+      <view class="caseTitle">巡检计划:</view>
+      <view class="caseStauts">每周{{wayOne.frequency}}次,已巡检{{wayOne.thisWeekPatrolNum?wayOne.thisWeekPatrolNum:0}}次
+      </view>
+    </view>
+    <block wx:if="{{wayOne.startTime}}">
+      <view class="chooseLine">
+        <view class="caseTitle">起止时间:</view>
+        <view class="caseStauts">{{filter.timeFilter(wayOne.startTime)}}-{{filter.timeFilter(wayOne.endTime)}}</view>
+      </view>
+    </block>
+    <block wx:else>
+      <view class="chooseLine">
+        <view class="caseTitle">总时长:</view>
+        <view class="caseStauts">{{wayOne.totalHour}}</view>
+      </view>
+    </block>
+    <view class="chooseLine">
+      <view class="caseTitle mapTitle">巡检路径:</view>
+      <map id="mapId" wx:if="{{markers.length}}" setting ="{{mapSetting}}" latitude="{{latitude}}" longitude="{{longitude}}"
+        markers="{{markers}}" polyline="{{polyline}}"></map>
+    </view>
+    <view class="submitBtn flex-x-center {{isPhoneX?'safeBtn':''}}">
+      <view class="flex-xy-center  {{isInspection||!wayList.length?'':'isInspection'}}" bindtap="toInspection" data-show="{{true}}">开始巡检</view>
+    </view>
+  </view>
+  <van-overlay show="{{ wayShow }}" bind:click="showSelect" />
+  <van-dialog use-slot show="{{ conFirmShow }}" show-confirm-button="{{false}}" bind:close="onClose" width="690rpx">
+    <view class=" flex-xy-center conFirmContent">
+      您当前选择的是{{wayOne.wayTitle}}
+    </view>
+    <view class="conFirmBtn flex">
+      <view class="flex-xy-center" bindtap="toInspection" data-show="{{false}}">取消</view>
+      <view class="flex-xy-center">
+        <navigator url="/pages/inspectionProcess/inspectionProcess?wayId={{wayOne.id}}&task=0" hover-class="none"
+          class="flex-xy-center" open-type="redirectTo">开始巡检</navigator>
+      </view>
+    </view>
+  </van-dialog>
 </navbar>

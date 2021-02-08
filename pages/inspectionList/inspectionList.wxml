@@ -1,2 +1,47 @@
 <!--pages/inspectionList/inspectionList.wxml-->
-<text>pages/inspectionList/inspectionList.wxml</text>
+<!--pages/caseList/caseList.wxml-->
+<wxs src="../../wxs/filter.wxs" module="filter"/>
+<navbar title="已巡检列表">
+  <scroll-view scroll-y style="height:100%" bindscrolltolower="onReachBottom">
+    <view class="caseList">
+      <block wx:for="{{patrolList}}" wx:key="index" wx:for-item="patrolOne">
+        <block wx:for="{{patrolOne}}" wx:key="id">
+          <view class="caseOne">
+            <view class="caseCode">
+              <text>巡检编码: {{item.patrolNo}}</text>
+            </view>
+            <view class="caseType">
+              <view class="caseTypeOne">
+                <view class="caseTitle">巡检标题:</view>
+                <view class="caseStauts">{{item.wayTitle}}</view>
+              </view>
+            </view>
+            <view class="caseType flex-x-between">
+              <view class="caseLeft">
+                <view class="caseTypetwo">
+                  <view class="caseTitle">巡检日期:</view>
+                  <view class="caseStauts">{{item.startTime}}</view>
+                </view>
+                <view class="caseTypetwo">
+                  <view class="caseTitle">是否超时:</view>
+                  <view class="caseStauts">{{filter.okOrNo(item.beTimeout)}}</view>
+                </view>
+              </view>
+              <view class="caseRight" bindtap="previewImg" data-current="{{item.patrolImage}}">
+                <image src="{{item.patrolImage}}"></image>
+              </view>
+            </view>
+            <navigator url="/pages/inspectionDetail/inspectionDetail?id={{item.id}}" hover-class="none" class="caseTime flex-x-between flex-y-center">
+              <text>上报时间:{{item.endTime}}</text>
+              <view class="seeDetail flex-y-center">
+                <text>查看详情</text>
+                <image src="/image/next@2x.png"></image>
+              </view>
+            </navigator>
+          </view>
+        </block>
+      </block>
+    </view>
+    <include src="/components/noData/noData.wxml" />
+  </scroll-view>
+</navbar>

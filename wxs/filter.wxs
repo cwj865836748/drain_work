@@ -1,4 +1,30 @@
-
+var formatNumber = function (n) {
+  n = n + ''
+  return n[1] ? n : '0' + n
+}
+var okOrNo = function (n) {
+  return parseInt(n) ? '是' : '否'
+}
+var caseStatus = function (s) {
+  switch (parseInt(s)) {
+    case 0:
+      return '待处理'
+    case 1:
+      return '待评价'
+    case 2:
+      return '已评价'
+  }
+}
+var timeFilter = function(time) {
+  return time?time.split(' ')[1]:''
+}
+var timeHHssmm = function(time) {
+  return time.split(' ').length==2?time.split(' ')[1]:time.split(' ')[0]
+}
 module.exports = {
-
+  formatNumber: formatNumber,
+  okOrNo: okOrNo,
+  caseStatus:caseStatus,
+  timeFilter:timeFilter,
+  timeHHssmm:timeHHssmm
 };

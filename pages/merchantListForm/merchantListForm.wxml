@@ -1,2 +1,84 @@
 <!--pages/merchantListForm/merchantListForm.wxml-->
-<text>pages/merchantListForm/merchantListForm.wxml</text>
+<wxs src='../../wxs/filter.wxs' module="filter" />
+<navbar title="{{!type?'新增商户':'新增修改记录'}}">
+  <view class="theForm">
+    <block wx:if="{{!type}}">
+      <view class="formOne">
+        <view class="formTitle">商户门牌号:</view>
+        <van-field value="{{ query.houseNo }}" placeholder="请输入门牌号" border="{{ false }}" bind:change="onChange"
+          placeholder-style="color:#171a2d" clearable data-key="houseNo" />
+      </view>
+    </block>
+    <block wx:else>
+      <view class="formOne">
+        <view class="formTitle">商户门牌号:</view>
+        <view class="placeholderClass">{{ query.houseNo }}</view>
+      </view>
+    </block>
+    <view class="formOne">
+      <view class="formTitle">商户名称:</view>
+      <van-field value="{{ query.merchantName }}" placeholder="请输入商户名称" border="{{ false }}" bind:change="onChange"
+        placeholder-style="color:#171a2d" clearable data-key="merchantName" />
+    </view>
+    <view class="formOne" bindtap="showSelect" data-key="allowShow">
+      <view class="formTitle">是否办理排水许可证:</view>
+      <view class="formContent flex-y-center">
+        <text class="{{allowWarn?'formNoWarn':''}}">{{query.beAllow?filter.okOrNo(query.beAllow):'请选择'}}</text>
+        <image wx:if="{{!allowWarn}}" src="/image/down@2x.png"></image>
+        <image wx:else src="/image/down_un@2x.png"></image>
+      </view>
+      <view class="formSelect" wx:if="{{allowShow}}">
+        <block wx:for="{{allowList}}" wx:key="index">
+          <view class="formSelectOne flex-y-center {{query.beAllow==item.id?'formSelectOneActive':''}}" catchtap="toSelect" data-key="beAllow" data-value="{{item.id}}">{{item.title}}</view>
+        </block>
+      </view>
+    </view>
+    <view class="formOne" bindtap="showSelect" data-key="installShow">
+      <view class="formTitle">是否有安装预处理设施:</view>
+      <view class="formContent flex-y-center">
+        <text class="{{installWarn?'formNoWarn':''}}">{{query.beInstall?filter.okOrNo(query.beInstall):'请选择'}}</text>
+        <image wx:if="{{!installWarn}}" src="/image/down@2x.png"></image>
+        <image wx:else src="/image/down_un@2x.png"></image>
+      </view>
+      <view class="formSelect" wx:if="{{installShow}}">
+        <block wx:for="{{installList}}" wx:key="index">
+          <view class="formSelectOne flex-y-center {{query.beInstall==item.id?'formSelectOneActive':''}}" catchtap="toSelect" data-key="beInstall" data-value="{{item.id}}">{{item.title}}</view>
+        </block>
+      </view>
+    </view>
+    <view class="formOne" bindtap="showSelect" data-key="merchantTypeShow">
+      <view class="formTitle">商户类型:</view>
+      <view class="formContent flex-y-center">
+        <text class="{{merchantTypeWarn?'formNoWarn':''}}">{{query.merchantTypeId?query.merchantTypeId:'请选择商户类型'}}</text>
+        <image wx:if="{{!merchantTypeWarn}}" src="/image/down@2x.png"></image>
+        <image wx:else src="/image/down_un@2x.png"></image>
+      </view>
+      <view class="formSelect" wx:if="{{merchantTypeShow}}">
+        <block wx:for="{{merchantTypeList}}" wx:key="index">
+          <view class="formSelectOne flex-y-center {{query.merchantTypeId==item.title?'formSelectOneActive':''}}" catchtap="toSelect" data-key="merchantTypeId" data-value="{{item.title}}">{{item.title}}</view>
+        </block>
+      </view>
+    </view>
+    <view class="formOne">
+      <view class="formTitle">商户联系人:</view>
+      <van-field value="{{ query.principal }}" placeholder="请输入商户联系人" border="{{ false }}" bind:change="onChange"
+        placeholder-style="color:#171a2d" clearable data-key="principal" />
+    </view>
+    <view class="formOne" style="margin-bottom:0">
+      <view class="formTitle">商户联系人电话:</view>
+      <van-field value="{{ query.phone }}" placeholder="请输入商户联系人电话" border="{{ false }}" bind:change="onChange"
+        placeholder-style="color:#171a2d" clearable data-key="phone" />
+    </view>
+    <view class="submitBtn flex-x-center {{isPhoneX?'safeBtn':''}}">
+      <view class="flex-xy-center" bindtap="submitForm">{{!type?'确认新增商户':'确认新增修改记录'}}</view>
+    </view>
+  </view>
+  <van-dialog use-slot show="{{ confirmShow }}" width="345" showConfirmButton="{{false}}">
+    <view class="dialogOk flex-xy-center flex-col">
+      <image src="/image/options@2x.png"></image>
+      <view>{{!type?'新增商户成功':'修改记录新增成功'}}</view>
+    </view>
+    <view class="comfirmButton flex-xy-center" bindtap="comfirmOk">确定</view>
+  </van-dialog>
+  <van-overlay z-index="2" show="{{allowShow||installShow||merchantTypeShow}}" bind:click="closeSelect" />
+</navbar>

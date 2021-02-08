@@ -1,1 +1,17 @@
-/* pages/merchantListForm/merchantListForm.wxss */
+@import "/pages/reportProblem/reportProblem.wxss";
+
+.theForm {
+  padding-top: 46rpx;
+}
+
+.formContent>input {
+  width: 100%;
+}
+
+.van-cell {
+  border-radius: 12rpx;
+  font-size: 30rpx !important;
+  padding-right: 24rpx !important;
+  padding-left: 30rpx !important;
+  height: 90rpx !important;
+}

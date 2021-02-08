@@ -1,1 +1,146 @@
-/* pages/reportProblem/reportProblem.wxss */
+/* pages/merchantListForm/merchantListForm.wxss */
+.theForm {
+  padding: 32rpx 30rpx 202rpx;
+}
+
+.formOne {
+  margin-bottom: 40rpx;
+  position: relative;
+}
+
+.formTitle {
+  color: var(--c2);
+  margin-bottom: 16rpx;
+}
+
+.formContent {
+  height: 90rpx;
+  background: #ffffff;
+  border-radius: 12rpx;
+  padding: 0 60rpx 0 30rpx;
+  position: relative;
+  font-size: 30rpx;
+}
+
+.formContent>image {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 30rpx;
+  width: 20rpx;
+  height: 12rpx;
+}
+
+.formContent>.sanjiao {
+  width: 12rpx;
+  height: 20rpx;
+}
+
+.formSelect {
+  position: absolute;
+  width: 100%;
+  background: #ffffff;
+  border-radius: 12rpx;
+  padding-left: 30rpx;
+  z-index: 4;
+}
+
+.formSelectOne {
+  height: 90rpx;
+  font-size: 30rpx;
+  color: var(--c1);
+  font-weight: bold;
+}
+
+.formSelectOneActive {
+  color: #008ffe;
+}
+
+textarea,
+.textareaLess {
+  height: 200rpx;
+  width: 100%;
+  background: #fff;
+  border-radius: 12rpx;
+  padding: 24rpx 30rpx 0;
+  font-size: 30rpx;
+  color: var(--c1);
+}
+
+.formNoWarn {
+  color: #ea3652;
+}
+
+.placeholderClass {
+  color: var(--c1);
+}
+
+.formPic {
+  position: relative;
+  width: 214rpx;
+  height: 160rpx;
+  background: #ffffff;
+  border-radius: 12rpx;
+  overflow: hidden;
+  margin-right: 24rpx;
+  margin-bottom: 22rpx;
+}
+
+.formPic:nth-child(3n) {
+  margin-right: 0rpx;
+}
+
+.formPic>.formPicAdd {
+  width: 64rpx;
+  height: 64rpx;
+}
+
+.formPic>.formPicOne {
+  height: 100%;
+}
+
+.formPic>.formPicDel {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 36rpx;
+  height: 36rpx;
+}
+
+.formPicWarn {
+  /* margin-top: 22rpx; */
+  font-size: 22rpx;
+  color: var(--c2);
+}
+
+
+.selectPicker {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+
+.dialogOk {
+  height: 216rpx;
+  font-size: 32rpx;
+  color: #333333;
+  font-weight: bold;
+}
+
+.dialogOk>image {
+  width: 84rpx;
+  height: 84rpx;
+  margin-bottom: 16rpx;
+}
+
+.comfirmButton {
+  height: 100rpx;
+  width: 100%;
+  font-size: 32rpx;
+  color: #008ffe;
+  font-weight: bold;
+  border-top: 2rpx solid #efefef;
+}
+.van-popup {
+  border-radius: 20rpx!important;
+}

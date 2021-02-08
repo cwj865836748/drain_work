@@ -1,2 +1,99 @@
 <!--pages/inspectionProcess/inspectionProcess.wxml-->
-<text>pages/inspectionProcess/inspectionProcess.wxml</text>
+<wxs src="../../wxs/filter.wxs" module="filter" />
+<navbar title="开始巡检">
+  <view class="processHead">
+    <view class="processOne">
+      <view class="processTitle">巡检标题:</view>
+      <view class="processAddress">{{wayOne.way.wayTitle}}</view>
+    </view>
+    <view class="processOne flex-y-center flex-x-between">
+      <view class="processTitle">巡检倒计时:</view>
+      <block wx:if="{{!wayOne.beTimeout}}">
+        <van-count-down use-slot time="{{ time }}" bind:finish="finished" bind:change="onChange" format="HH:mm:ss">
+          <text class="processTime">{{ filter.formatNumber(timeData.hours) }}</text>
+          <text class="processTime">{{ filter.formatNumber(timeData.minutes) }}</text>
+          <text class="processTime">{{ filter.formatNumber(timeData.seconds) }}</text>
+        </van-count-down>
+      </block>
+      <block wx:else>
+        <view class="beTimeout">已超时</view>
+      </block>
+    </view>
+  </view>
+  <view class="processCard">
+    <view class="processCardTitle flex-y-center">
+      各个打卡时间点:
+    </view>
+    <view class="processCardList flex-wrap">
+      <block wx:for="{{wayOne.way.nodeList}}" wx:key="index">
+        <view class="processCardOne">
+          <view class="processCardOneHead flex-y-center">
+            <image src="/image/home_icon2@2x.png" wx:if="{{!item.nodeTime}}"></image>
+            <image src="/image/home_icon1@2x.png" wx:else></image>
+            <text>{{item.nodeName}}</text>
+          </view>
+          <block wx:if="{{!item.nodeTime}}">
+            <view class="processCardOneTime">__ : __ : __</view>
+          </block>
+          <block wx:else>
+            <view class="processCardOneTime timeShow">{{filter.timeHHssmm(item.nodeTime)}}</view>
+          </block>
+        </view>
+      </block>
+    </view>
+    <map id="mapId" wx:if="{{markers.length}}" showLocation latitude="{{latitude}}" longitude="{{longitude}}"
+      markers="{{markers}}" polyline="{{polyline}}"></map>
+    <view class="cardWarn">
+      <view class="cardWarnTitle">打卡提示:</view>
+      <view class="cardContent">
+        1、通过依次扫描巡检路上所有规定位置的二维码完成该点的打卡
+      </view>
+      <view class="cardContent">
+        2、如果打卡过程中出现特殊情况导致打卡失败,请联系管长:
+        <text bindtap="toPhone">{{adminPhone}}</text>
+      </view>
+    </view>
+    <view class="submitBtn flex-x-center {{isPhoneX?'safeBtn':''}}">
+      <block wx:if="{{isDoCode}}">
+        <view class="flex-xy-center" bindtap="doNode">扫码打卡</view>
+      </block>
+      <block wx:else>
+        <view class="flex-xy-center">
+          <navigator url="/pages/processResult/processResult?id={{wayOne.patrol.id}}&wayId={{wayOne.way.id}}&type=1"
+            class="flex-xy-center">提交巡检结果</navigator>
+        </view>
+      </block>
+    </view>
+  </view>
+  <van-dialog use-slot show="{{ confirmShow }}" width="345" showConfirmButton="{{false}}">
+    <view class="dialogOk flex-xy-center flex-col">
+
+      <block wx:if="{{doCodeOKorNo}}">
+        <image src="/image/options@2x.png"></image>
+      </block>
+      <block wx:else>
+        <image src="/image/fail@2x.png"></image>
+      </block>
+
+      <view class="{{doCodeOKorNo?'':'fail'}}">{{doCodeOKorNo?'打卡成功!':'打卡失败!'}}</view>
+      <block wx:if="{{doCodeOKorNo}}">
+        <view class="dialogDetail flex-x-center">
+          <view class="dialogDetailOne flex-y-center">
+            <image src="/image/addr@2x.png"></image>
+            <text>{{nodeObj.nodeName}}</text>
+          </view>
+          <view class="dialogDetailOne flex-y-center">
+            <image src="/image/home_icon2@2x.png"></image>
+            <text>{{nodeObj.nodeTime}}</text>
+          </view>
+        </view>
+      </block>
+      <block wx:else>
+        <view class="dialogFail flex-x-center">
+          未在打卡范围内,请到打卡地之后重新打卡!
+        </view>
+      </block>
+      <view class="dialogBtn flex-xy-center" bindtap="conFirmOk">确定</view>
+    </view>
+  </van-dialog>
+</navbar>

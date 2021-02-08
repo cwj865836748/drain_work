@@ -1,3 +1,7 @@
 {
-  "usingComponents": {}
+  "usingComponents": {
+    "navbar":"/components/navbar/navbar",
+    "van-count-down": "@vant/weapp/count-down/index",
+    "van-dialog": "@vant/weapp/dialog/index"
+  }
 }

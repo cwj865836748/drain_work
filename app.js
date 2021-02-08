@@ -1,6 +1,7 @@
 App({
   globalData: {
-    qqKey: 'ZBRBZ-E4WC2-HA3UF-CMQPB-QKR6E-5OFVJ'
+    qqKey: 'ZBRBZ-E4WC2-HA3UF-CMQPB-QKR6E-5OFVJ',
+    baseUrl:'https://water.zyark2.com'
   },
   /**
    * 当小程序初始化完成时，会触发 onLaunch（全局只触发一次）

@@ -1,21 +1,181 @@
 /**index.wxss**/
-.userinfo {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+.homeBg {
+  height: 376rpx;
 }
 
-.userinfo-avatar {
+.homeBg>image {
+  height: 100%;
+}
+
+.home {
+  padding: 0 30rpx;
+  position: relative;
+  z-index: 1;
+}
+
+.homeHead {
+  height: 216rpx;
+  background: #ffffff;
+  border-radius: 12rpx;
+  font-size: 24rpx;
+  color: var(--c2);
+  padding-left: 34rpx;
+  margin-top: -120rpx;
+  margin-bottom: 40rpx;
+}
+
+.homeAvatar {
   width: 128rpx;
   height: 128rpx;
-  margin: 20rpx;
   border-radius: 50%;
+  overflow: hidden;
+  margin-right: 22rpx;
 }
 
-.userinfo-nickname {
-  color: #aaa;
+.homeName {
+  font-size: 40rpx;
+  color: var(--c1);
+  font-weight: bold;
+  margin-left: 6rpx;
+  margin-bottom: 12rpx;
 }
 
-.usermotto {
-  margin-top: 200px;
+.homeIdentity>image {
+  width: 48rpx;
+  height: 48rpx;
+}
+
+.homeIdentity>.position {
+  position: relative;
+  height: 44rpx;
+  background: rgba(0, 143, 254, 0.08);
+  border-radius: 0 24rpx 24rpx 0;
+  color: #008ffe;
+  padding: 6rpx 14rpx 6rpx 20rpx;
+  margin-left: -14rpx;
+  margin-right: 42rpx;
+}
+
+.homeIdentity>.position::after {
+  position: absolute;
+  top: 50%;
+  right: -22rpx;
+  transform: translateY(-50%);
+  content: '';
+  width: 4rpx;
+  height: 22rpx;
+  background: rgba(145, 147, 160, .46);
+}
+
+.homeQuantity .homeOne {
+  width: 334rpx;
+  height: 164rpx;
+  background: #ffffff;
+  border-radius: 12rpx;
+  margin-right: 22rpx;
+  padding: 32rpx 0 0 30rpx;
+  font-size: 24rpx;
+  color: var(--c2);
+}
+
+.homeQuantity .homeOne:nth-child(2n) {
+  margin-bottom: 24rpx;
+  margin-right: 0rpx;
+}
+
+.homeOne>.homeOneTitle>image {
+  width: 36rpx;
+  height: 36rpx;
+  margin-right: 4rpx;
+}
+
+.homeOne>.homeOneNum {
+  margin-top: 20rpx;
+  font-size: 44rpx;
+  font-family: DINAlternate, DINAlternate-Bold;
+  font-weight: bold;
+  color: var(--c1)
+}
+
+.homeBtn {
+  margin-top: 74rpx;
+}
+
+.homeBtn>view {
+  height: 88rpx;
+  border-radius: 6rpx;
+  flex: 1;
+  font-size: 34rpx;
+}
+
+.homeBtn>view:first-child {
+  background: #008ffe;
+  color: #ffffff;
+}
+
+.homeBtn>view:nth-child(2) {
+  background: transparent;
+  border: 4rpx solid #008ffe;
+  color: #008ffe;
+  margin-left: 24rpx;
+}
+
+.phoneDialog>view {
+  height: 200rpx;
+  color: var(--c1);
+  font-weight: bold;
+  font-size: 32rpx;
+  padding: 0 30rpx;
+  text-align: center;
+}
+
+.phoneDialog>button {
+  font-size: 32rpx;
+  color: #008ffe;
+  height: 100rpx;
+  border-top: 2rpx solid #efefef;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.customerService {
+  width: 104rpx;
+  height: 104rpx;
+  background: #008ffe;
+  border-radius: 50%;
+  color: #ffffff;
+  font-size: 18rpx;
+  position: relative;
+}
+
+.customerService>image {
+  width: 76rpx;
+  height: 76rpx;
+}
+
+.customerService>view {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 16rpx;
+  white-space: nowrap;
+}
+.movableArea {
+  position: fixed;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: 5;
+  background-color:transparent;
+}
+.movableView {
+  pointer-events: auto;
+  width: 104rpx;
+  height: auto;
+  background-color:transparent;
+}
+.homeBtn navigator {
+  width: 100%;
+  height: 100%;
 }

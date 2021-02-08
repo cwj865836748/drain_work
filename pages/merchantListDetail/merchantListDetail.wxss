@@ -1,1 +1,63 @@
 /* pages/merchantListDetail/merchantListDetail.wxss */
+@import "/components/noData/noData.wxss";
+.recordHead {
+  height: 122rpx;
+  padding: 0 30rpx;
+}
+.recordDoorCode {
+  padding: 0 28rpx;
+  font-size: 30rpx;
+  font-weight: bold;
+  color: var(--c1);
+}
+.recordDoorCode>image {
+  width: 36rpx;
+  height: 40rpx;
+  margin-right: 8rpx;
+}
+.recordHead::before,
+.recordHead::after {
+  content: "";
+  height: 2rpx;
+  background:#eeeeee;
+  flex:1
+}
+.scroll {
+  flex:1;
+  overflow: hidden;
+  padding-bottom: 104rpx;
+}
+.recordList {
+  padding: 0 30rpx;
+}
+.recordOne {
+  border-radius: 12rpx;
+  background: #ffffff;
+  margin-bottom:30rpx;
+  padding:0 30rpx 30rpx;
+}
+.recordOne:last-child {
+  margin-bottom:46rpx;
+}
+.recordOneHead {
+  height:144rpx;
+  border-bottom: 2rpx solid #f9f9f9;
+  margin-bottom: 24rpx;
+}
+.recordLeft {
+  width: 334rpx;
+}
+.recordOneType {
+  flex:1;
+}
+.recordOneList>.recordOneType:nth-child(-n+4) {
+  margin-bottom: 46rpx;
+}
+.logoImage {
+  width: 36rpx;
+  height:36rpx;
+  margin-right:4rpx;
+}
+.safeBtn {
+  padding-bottom:68rpx;
+}

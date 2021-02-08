@@ -2,11 +2,14 @@ import {
   showToast
 } from '../utils/wx'
 // 后台url
-const baseUrl = 'https://pmaly.ysjdl.cn';
+const baseUrl = 'https://water.zyark2.com';
+// const baseUrl = 'http://106.52.146.32:8092';
 // 同时发送异步代码的次数
 let ajaxTimes = 0;
 let statusCode = {
-  success: 200
+  success: 200,
+  noAuth: 401,
+  cardFail:11003
 }
 
 export const request = (params) => {
@@ -25,7 +28,6 @@ export const request = (params) => {
   //   mask: true
   // });
   // }
-
   return new Promise((resolve, reject) => {
     wx.request({
       method: 'GET',
@@ -33,10 +35,9 @@ export const request = (params) => {
       header: header,
       url: baseUrl + params.url,
       success: (res) => {
-
-        if (res.data.code == statusCode.success) {
+        if (res.data.code == (statusCode.success|| statusCode.cardFail)) {
           resolve(res.data)
-        } else {
+        }else if(res.data.code == statusCode.noAuth){
           setTimeout(() => {
             wx.showToast({
               title: res.data.msg,
@@ -45,6 +46,21 @@ export const request = (params) => {
               mask: true
             })
           }, 100)
+          wx.clearStorageSync()
+          wx.reLaunch({
+            url: '/pages/index/index',
+          })
+        }
+         else {
+          setTimeout(() => {
+            wx.showToast({
+              title: res.data.msg,
+              icon: 'none',
+              duration: 2000,
+              mask: true
+            })
+          }, 100)
+          resolve(res.data)
         }
       },
       fail: (res) => {

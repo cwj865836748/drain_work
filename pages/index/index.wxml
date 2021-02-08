@@ -1,5 +1,66 @@
 <!--index.wxml-->
-<navbar title="巡检上报" navbarType="2" back="{{false}}">
-
+<navbar id="navbar" tabbar="0" isTabbar="{{true}}" title="巡检上报" navbarType="2" back="{{false}}"
+  headColor="{{headColor}}" titleColor="{{titleColor}}">
+  <view class="homeBg">
+    <image src="/image/home_bg@2x.png"></image>
+  </view>
+  <view class="home">
+    <view class="homeHead flex-y-center">
+      <view class="homeAvatar">
+        <open-data type="userAvatarUrl"></open-data>
+      </view>
+      <view class="homeMsg">
+        <view class="homeName">
+          <open-data type="userNickName"></open-data>
+        </view>
+        <view class="homeIdentity flex-y-center">
+          <image src="/image/home_people@2x.png"></image>
+          <view class="position">{{user.identity?'巡检人员':'市民'}}</view>
+          <view class="phone">{{user.phone}}</view>
+        </view>
+      </view>
+    </view>
+    <view class="homeQuantity flex-wrap">
+      <block wx:for="{{homeQuantity}}" wx:key="index">
+        <view class="homeOne" wx:if="{{index!=4||user.identity}}" bindtap="goRoute" data-index="{{item.index}}">
+          <view class="homeOneTitle flex-y-center">
+            <image src="{{item.logo}}"></image>
+            <text>{{item.title}}</text>
+          </view>
+          <view class="homeOneNum">{{item.num}}</view>
+        </view>
+      </block>
+    </view>
+    <view class="homeBtn flex">
+      <view class="flex-xy-center">
+        <navigator class="flex-xy-center" url="/pages/reportProblem/reportProblem" hover-class="none">问题上报</navigator>
+      </view>
+      <view wx:if="{{user.identity}}" class="flex-xy-center" bindtap="goInspectionProcess">
+        去巡检
+      </view>
+    </view>
+  </view>
+  <movable-area class="movableArea" style="width:{{modelWidth}}px;height:{{modelHeight}}px;" wx:if="{{xZhou}}">
+    <movable-view class="movableView" x="{{xZhou}}" y="{{yZhou}}" direction="all" animation="{{false}}">
+      <view class="customerService flex-y-center flex-col" bindtap="toPhone">
+        <image src="/image/tel@2x.png"></image>
+        <view>热线电话</view>
+      </view>
+    </movable-view>
+  </movable-area>
+  <van-dialog use-slot show="{{ phoneAuthShow }}" width="345" showConfirmButton="{{false}}">
+    <block wx:if="{{canIUse}}">
+      <view class="phoneDialog">
+        <view class="flex-xy-center">小程序请求获取您的用户信息</view>
+        <button class="flex-xy-center" hover-class="none" open-type="getUserInfo"
+        bindgetuserinfo="bindGetUserInfo">确定</button>
+      </view>
+    </block>
+    <block wx:else>
+      <view class="phoneDialog">
+        <view class="flex-xy-center">您当前微信版本不支持获取手机号功能，请先升级微信再进入小程序</view>
+        <button class="flex-xy-center" hover-class="none" data-close="{{true}}" bindtap="getPhoneNumber">确定</button>
+      </view>
+    </block>
+  </van-dialog>
 </navbar>
-

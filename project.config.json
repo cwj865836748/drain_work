@@ -4,37 +4,44 @@
     "ignore": []
   },
   "setting": {
-    "bundle": false,
-    "userConfirmedBundleSwitch": false,
     "urlCheck": true,
-    "scopeDataCheck": false,
-    "coverView": true,
     "es6": true,
+    "enhance": false,
     "postcss": true,
-    "compileHotReLoad": false,
     "preloadBackgroundData": false,
     "minified": true,
-    "autoAudits": false,
     "newFeature": false,
-    "uglifyFileName": false,
-    "uploadWithSourceMap": true,
-    "useIsolateContext": true,
+    "coverView": true,
     "nodeModules": false,
-    "enhance": false,
-    "useCompilerModule": true,
-    "userConfirmedUseCompilerModuleSwitch": false,
+    "autoAudits": false,
+    "showShadowRootInWxmlPanel": true,
+    "scopeDataCheck": false,
+    "uglifyFileName": false,
+    "checkInvalidKey": true,
+    "checkSiteMap": true,
+    "uploadWithSourceMap": true,
+    "compileHotReLoad": false,
     "useMultiFrameRuntime": true,
     "useApiHook": true,
     "useApiHostProcess": false,
-    "showShadowRootInWxmlPanel": true,
-    "packNpmManually": false,
+    "babelSetting": {
+      "ignore": [],
+      "disablePlugins": [],
+      "outputPath": ""
+    },
     "enableEngineNative": false,
+    "bundle": false,
+    "useIsolateContext": true,
+    "useCompilerModule": true,
+    "userConfirmedUseCompilerModuleSwitch": false,
+    "userConfirmedBundleSwitch": false,
+    "packNpmManually": false,
     "packNpmRelationList": [],
     "minifyWXSS": true
   },
   "compileType": "miniprogram",
   "libVersion": "2.14.4",
-  "appid": "wx6a5654216935e847",
+  "appid": "wxd82a250d7846f055",
   "projectname": "%E6%8E%92%E6%B0%B4%E5%B7%A1%E6%A3%80",
   "debugOptions": {
     "hidedInDevtools": []
@@ -56,6 +63,67 @@
         {
           "name": "选择巡检路线",
           "pathName": "pages/inspectionRoute/inspectionRoute",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "问题上报",
+          "pathName": "pages/reportProblem/reportProblem",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "案件列表",
+          "pathName": "pages/caseList/caseList",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "已巡检列表",
+          "pathName": "pages/inspectionList/inspectionList",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "案件详情",
+          "pathName": "pages/caseDetail/caseDetail",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "提交处理结果",
+          "pathName": "pages/processResult/processResult",
+          "query": "id=63&wayId=1&type=1",
+          "scene": null
+        },
+        {
+          "name": "商户列表",
+          "pathName": "pages/merchantList/merchantList",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "商户修改记录",
+          "pathName": "pages/merchantListDetail/merchantListDetail",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "新增商户",
+          "pathName": "pages/merchantListForm/merchantListForm",
+          "query": "type=1&houseNo=B56456",
+          "scene": null
+        },
+        {
+          "name": "开始巡检",
+          "pathName": "pages/inspectionProcess/inspectionProcess",
+          "query": "wayId=73",
+          "scene": null
+        },
+        {
+          "name": "巡检详情",
+          "pathName": "pages/inspectionDetail/inspectionDetail",
+          "query": "",
           "scene": null
         }
       ]

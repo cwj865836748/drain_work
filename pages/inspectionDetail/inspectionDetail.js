@@ -1,20 +1,74 @@
 // pages/inspectionDetail/inspectionDetail.js
+import {
+  patrol
+} from '../../request/api.js'
+import {
+  getPointsCenter
+} from '../../utils/util.js'
+import {
+  previewImage
+} from '../../utils/wx.js'
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-
+    backgroundColor:"#fff",
+    wayOne:null,
+    latitude: null,
+    longitude: null,
+    markers: [],
+    polyline: [{
+      points: [],
+      color: '#008ffe', //绘制区域
+      width: 4
+    }]
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    this.getInit(options.id)
   },
-
+  getInit(id){
+    patrol.patrolInfo({id}).then(res=>{
+      this.setData({
+        wayOne:res.data
+      })
+      this.getMapSetting(res.data)
+    })
+  },
+  getMapSetting(way) {
+    const markers = way.nodeList.map(item => {
+      return {
+        ...item,
+        iconPath: item.nodeTime?"/image/addr@2x-3.png":"/image/addr@2x-2.png",
+        width: "51",
+        height: "52",
+      }
+    })
+    const {
+      latitude,
+      longitude
+    } = getPointsCenter(way.nodeList)
+    this.setData({
+      latitude,
+      longitude,
+      markers,
+      [`polyline[0].points`]: way.nodeList
+    })
+  },
+  previewImg(e) {
+    const {
+      current
+    } = e.currentTarget.dataset
+    previewImage({
+      current,
+      urls: this.data.wayOne.patrolImageArray
+    })
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

@@ -10,7 +10,9 @@
     "pages/inspectionList/inspectionList",
     "pages/merchantList/merchantList",
     "pages/merchantListForm/merchantListForm",
-    "pages/merchantListDetail/merchantListDetail"
+    "pages/merchantListDetail/merchantListDetail",
+    "pages/processResult/processResult",
+    "pages/authWx/authWx"
   ],
   "window":{
     "backgroundTextStyle":"light",
@@ -19,25 +21,10 @@
     "navigationBarTextStyle":"black",
     "navigationStyle":"custom"
   },
-  "tabBar": {
-    "color": "#cccccc",
-    "selectedColor": "#49047a",
-    "borderStyle": "white",
-    "backgroundColor": "#FFFFFF",
-    "list": [
-      {
-        "pagePath": "pages/index/index",
-        "text": "首页"
-      },
-      {
-        "pagePath": "pages/caseList/caseList",
-        "text": "案件"
-      },
-      {
-        "pagePath": "pages/merchantList/merchantList",
-        "text": "商户"
-      }
-    ]
+  "permission": {
+    "scope.userLocation": {
+        "desc": "你的位置信息将用于小程序位置接口的效果展示"
+    }
   },
   "style": "v2",
   "sitemapLocation": "sitemap.json"

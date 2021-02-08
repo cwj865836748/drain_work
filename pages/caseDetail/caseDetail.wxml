@@ -1,2 +1,123 @@
 <!--pages/caseDetail/caseDetail.wxml-->
-<text>pages/caseDetail/caseDetail.wxml</text>
+<wxs src="../../wxs/filter.wxs" module="filter" />
+<navbar title="案件详情" backgroundColor="{{backgroundColor}}">
+  <view class="caseDetail">
+    <view class="caseDetailHead flex-x-between flex-y-center">
+      <view class="caseDetailHeadCode">
+        <view>案件编码: {{caseDetail.caseNo}}</view>
+        <view>上报时间: {{caseDetail.createTime}}</view>
+      </view>
+      <view class="caseStauts">{{filter.caseStatus(caseDetail.caseStatus)}}</view>
+    </view>
+    <view class="caseDetailContent">
+      <view class="caseDetailOne">
+        <view class="caseTitle">业务类型:</view>
+        <view class="caseStauts">{{caseDetail.businessType}}</view>
+      </view>
+      <view class="caseDetailOne">
+        <view class="caseTitle">设施类型:</view>
+        <view class="caseStauts">{{caseDetail.waterType}}</view>
+      </view>
+      <view class="caseDetailOne">
+        <view class="caseTitle">小区:</view>
+        <view class="caseStauts">{{caseDetail.streetName}}</view>
+      </view>
+      <view class="caseDetailOne">
+        <view class="caseTitle">详细地址:</view>
+        <view class="caseStauts">{{caseDetail.detailAddress}}</view>
+      </view>
+      <view class="caseDetailOne">
+        <view class="caseTitle">案件时限(小时):</view>
+        <view class="caseStauts">{{caseDetail.totalHour}}</view>
+      </view>
+      <view class="caseDetailOne">
+        <view class="caseTitle">是否超时:</view>
+        <view class="caseStauts">{{filter.okOrNo(caseDetail.beTimeout)}}</view>
+      </view>
+      <view class="caseDetailOne">
+        <view class="caseTitle">定位信息:</view>
+        <view class="caseAddress flex-y-center" bindtap="openLocation">
+          <text>{{caseDetail.locateAddress}}</text>
+          <image src="/image/location@2x.png"></image>
+        </view>
+      </view>
+    </view>
+    <view class="caseDetailMsg">
+      <view class="caseDetailUp flex-y-center">
+        上报信息:
+      </view>
+      <view class="caseDetailImgList flex-wrap">
+        <block wx:for="{{caseDetail.questionImageArray}}" wx:key="index">
+          <view class="caseDetailImg" bindtap="previewImg" data-current="{{item}}" data-index="{{0}}">
+            <image src="{{item}}"></image>
+          </view>
+        </block>
+      </view>
+      <view class="caseDetailOne">
+        <view class="caseTitle">文字描述:</view>
+        <view class="caseStauts">{{caseDetail.questionDescribe}}</view>
+      </view>
+    </view>
+    <view class="caseDetailMsg result" wx:if="{{caseDetail.handleImage}}">
+      <view class="caseDetailUp flex-y-center">
+        处理结果:
+      </view>
+      <view class="caseDetailImgList flex-wrap">
+        <block wx:for="{{caseDetail.handleImageArray}}" wx:key="index">
+          <view class="caseDetailImg" bindtap="previewImg" data-current="{{item}}" data-index="{{1}}">
+            <image src="{{item}}"></image>
+          </view>
+        </block>
+      </view>
+      <view class="caseDetailOne">
+        <view class="caseTitle">文字描述:</view>
+        <view class="caseStauts">{{caseDetail.handleDescribe}}</view>
+      </view>
+    </view>
+    <view wx:if="{{caseDetail.beSatisfied==0||caseDetail.beSatisfied==1}}" class="caseDetailMsg evaluation">
+      <view class="caseDetailUp flex-y-center" style="margin-bottom:0">
+        市民评价是否满意: {{filter.okOrNo(caseDetail.beSatisfied)}}
+      </view>
+    </view>
+  </view>
+  <block wx:if="{{caseDetail.beDisplayHandleButton}}">
+    <view class="submitBtn flex-x-center {{isPhoneX?'safeBtn':''}}">
+      <view class="flex-xy-center">
+        <navigator url="/pages/processResult/processResult?id={{caseDetail.id}}&type=0" hover-class="none" class="flex-xy-center">去处理</navigator> 
+      </view>
+    </view>
+  </block>
+
+  <block wx:if="{{caseDetail.beDisplayCommentButton}}">
+    <view class="submitBtn flex-x-center {{isPhoneX?'safeBtn':''}}">
+      <view class="flex-xy-center" bindtap="toEvaluation">评价</view>
+    </view>
+  </block>
+
+  <van-action-sheet show="{{ evaluationShow }}" bind:click-overlay="toEvaluation">
+    <view class="evaluationStatus">
+      <view class="evaluationTitle">您对此次维修服务是否满意?</view>
+      <view class="isEvaluation flex-y-center" style="  margin-bottom: 16rpx;" bindtap="toSelcet" data-select="1">
+        <block wx:if="{{evaluationQuery.beSatisfied==1}}">
+          <image src="/image/select@2x.png"></image>
+        </block>
+        <block wx:else>
+          <image src="/image/unselect@2x.png"></image>
+        </block>
+        <text class="{{evaluationQuery.beSatisfied==1?'isEvaluationActive':''}}">是</text>
+      </view>
+      <view class="isEvaluation flex-y-center" bindtap="toSelcet"  data-select="0">
+        <block wx:if="{{evaluationQuery.beSatisfied==0}}">
+          <image src="/image/select@2x.png"></image>
+        </block>
+        <block wx:else>
+          <image src="/image/unselect@2x.png"></image>
+        </block>
+        <text class="{{evaluationQuery.beSatisfied==0?'isEvaluationActive':''}}">否</text>
+      </view>
+
+      <view class="submitEvaluation flex-xy-center" bindtap="toEvaluation" data-comment="{{true}}">确定提交</view>
+
+    </view>
+  </van-action-sheet>
+</navbar>

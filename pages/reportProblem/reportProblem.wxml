@@ -1,2 +1,110 @@
-<!--pages/reportProblem/reportProblem.wxml-->
-<text>pages/reportProblem/reportProblem.wxml</text>
+<!--pages/merchantListForm/merchantListForm.wxml-->
+<navbar title="问题上报">
+  <view class="theForm {{isPhoneX?'safeForm':''}}">
+    <view class="formOne" bindtap="showSelect" data-key="businessTypeShow">
+      <view class="formTitle">业务类型:</view>
+      <view class="formContent flex-y-center">
+        <text class="{{businessWarn?'formNoWarn':''}}">{{query.businessType?query.businessType:'请选择'}}</text>
+        <image wx:if="{{!businessWarn}}" src="/image/down@2x.png"></image>
+        <image wx:else src="/image/down_un@2x.png"></image>
+      </view>
+      <view class="formSelect" wx:if="{{businessTypeShow}}" catchtouchmove="move">
+        <scroll-view scroll-y style="height:360rpx">
+          <block wx:for="{{businessTypeList}}" wx:key="index">
+            <view class="formSelectOne flex-y-center {{query.businessType==item.typeName?'formSelectOneActive':''}}"
+              catchtap="toSelect" data-key="businessType" data-value="{{item.typeName}}" data-configno="{{item.id}}">
+              {{item.typeName}}</view>
+          </block>
+        </scroll-view>
+      </view>
+    </view>
+    <view class="formOne" bindtap="showSelect" data-key="waterTypeShow">
+      <view class="formTitle">设施类型:</view>
+      <view class="formContent flex-y-center">
+        <text class="{{waterTypeWarn?'formNoWarn':''}}">{{query.waterType?query.waterType:'请选择'}}</text>
+        <image wx:if="{{!waterTypeWarn}}" src="/image/down@2x.png"></image>
+        <image wx:else src="/image/down_un@2x.png"></image>
+      </view>
+      <view class="formSelect" wx:if="{{waterTypeShow}}" catchtouchmove="move">
+        <scroll-view scroll-y style="height:360rpx">
+          <block wx:for="{{waterTypeList}}" wx:key="index">
+            <view class="formSelectOne flex-y-center {{query.waterType==item.waterName?'formSelectOneActive':''}}"
+              catchtap="toSelect" data-key="waterType" data-value="{{item.waterName}}">{{item.waterName}}</view>
+          </block>
+        </scroll-view>
+      </view>
+    </view>
+    <view class="formOne" bindtap="showSelect" data-key="streetShow">
+      <view class="formTitle">所在小区:</view>
+      <view class="formContent flex-y-center">
+        <!-- class="formNoWarn" -->
+        <text class="{{streetWarn?'formNoWarn':''}}">{{query.streetName?query.streetName:'请选择'}}</text>
+        <!-- <image src="/image/down_un@2x.png"></image> -->
+        <image wx:if="{{!streetWarn}}" src="/image/down@2x.png"></image>
+        <image wx:else src="/image/down_un@2x.png"></image>
+      </view>
+      <view class="formSelect" wx:if="{{streetShow}}" catchtouchmove="move">
+        <scroll-view scroll-y style="height:360rpx">
+          <block wx:for="{{streetList}}" wx:key="index">
+            <view class="formSelectOne flex-y-center {{query.streetName==item.streetName?'formSelectOneActive':''}}"
+              catchtap="toSelect" data-key="streetName" data-value="{{item.streetName}}" data-id="{{item.id}}">
+              {{item.streetName}}</view>
+          </block>
+        </scroll-view>
+      </view>
+    </view>
+    <view class="formOne" bindtap="getLocation">
+      <view class="formTitle">获取定位:</view>
+      <view class="formContent flex-y-center">
+        <text>{{query.locateAddress?query.locateAddress:'点击获取定位信息'}}</text>
+        <image src="/image/next@2x.png" class="sanjiao"></image>
+      </view>
+    </view>
+    <view class="formOne">
+      <view class="formTitle">详细地址:</view>
+      <block wx:if="{{businessTypeShow||streetShow||waterTypeShow}}">
+        <view class="textareaLess">{{query.detailAddress?query.detailAddress:'请输入详细地址'}}</view>
+      </block>
+      <block wx:else>
+        <textarea placeholder="请输入详细地址" placeholder-class="placeholderClass" bindinput="textareaInput"
+          data-key="detailAddress" fixed value="{{query.detailAddress}}"></textarea>
+      </block>
+    </view>
+    <view class="formOne">
+      <view class="formTitle">具体问题:</view>
+      <block wx:if="{{businessTypeShow||streetShow||waterTypeShow}}">
+        <view class="textareaLess">{{query.questionDescribe?query.questionDescribe:'请输入具体问题描述供相关人员了解情况'}}</view>
+      </block>
+      <block wx:else>
+        <textarea placeholder="请输入具体问题描述供相关人员了解情况" placeholder-class="placeholderClass" maxlength="150"
+          bindinput="textareaInput" data-key="questionDescribe" fixed value="{{query.questionDescribe}}"></textarea>
+      </block>
+    </view>
+    <view class="formOne" style="margin-bottom:0">
+      <view class="formTitle">上传照片:</view>
+      <view class="formPicList flex-wrap">
+        <view class="formPic flex-xy-center" bindtap="uploadImage" wx:if="{{imgList.length<6}}">
+          <image class="formPicAdd" src="/image/add_pic@2x.png"></image>
+        </view>
+        <block wx:for="{{imgList}}" wx:key="index">
+          <view class="formPic">
+            <image class="formPicOne" src="{{item}}" bindtap="previewImg" data-current="{{item}}"></image>
+            <image class="formPicDel" src="/image/delete@2x.png" bindtap="delImage" data-index="{{index}}"></image>
+          </view>
+        </block>
+      </view>
+      <view class="formPicWarn">(请提交上报问题的照片及周边环境照,以便维修人员确认问题)</view>
+    </view>
+    <view class="submitBtn flex-x-center {{isPhoneX?'safeBtn':''}}">
+      <view class="flex-xy-center" bindtap="submitForm">提交</view>
+    </view>
+  </view>
+  <van-dialog use-slot show="{{ confirmShow }}" width="345" showConfirmButton="{{false}}">
+    <view class="dialogOk flex-xy-center flex-col">
+      <image src="/image/options@2x.png"></image>
+      <view>提交成功!</view>
+    </view>
+    <view class="comfirmButton flex-xy-center" bindtap="comfirmOk">确定</view>
+  </van-dialog>
+  <van-overlay z-index="2" show="{{businessTypeShow||streetShow||waterTypeShow}}" bind:click="closeSelect" />
+</navbar>

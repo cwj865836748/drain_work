@@ -1,1 +1,3 @@
 /* pages/inspectionList/inspectionList.wxss */
+@import "/pages/caseList/caseList.wxss";
+@import "/components/noData/noData.wxss";

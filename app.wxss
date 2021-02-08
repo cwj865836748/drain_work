@@ -36,10 +36,11 @@ page {
   /* --buttonColor:linear-gradient(to left,#73009d, #6c03a5 39%, #40205f); */
   width: 100%;
   height: 100%;
-  background: #ffffff;
+  background: #f9f9f9;
   font-family: SourceHanSansSC,SourceHanSansSC-Regular;
   font-size: 28rpx;
-  --colorOne: #000b1d;
+  --c1:#171A2d;
+  --c2:#9193A0;
 }
 
 image,video {
@@ -55,7 +56,45 @@ button {
 button::after {
   border: none
 }
+button:not([size='mini']) {
+  width: auto!important;
+  margin:0!important;
+}
+.caseTitle {
+  color: var(--c2);
+  margin-bottom: 10rpx;
+  font-size: 24rpx;
+}
 
+.caseStauts {
+  color: var(--c1);
+  font-weight: bold;
+}
+.submitBtn {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  padding: 8rpx 0;
+  box-shadow: 0rpx -4rpx 8rpx 0rpx rgba(0, 0, 0, 0.02);
+  background: #ffffff;
+  z-index: 2;
+}
+.safeBtn {
+  padding-bottom: 76rpx;
+}
+.submitBtn>view {
+  width: 690rpx;
+  height: 88rpx;
+  background: #008ffe;
+  border-radius: 6rpx;
+  color: #ffffff;
+  font-size: 34rpx;
+}
+.submitBtn navigator {
+  width: 100%;
+  height: 100%;
+}
 .flex {
   display: -webkit-box;
   display: -webkit-flex;

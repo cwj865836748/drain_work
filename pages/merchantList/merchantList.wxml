@@ -1,2 +1,59 @@
 <!--pages/merchantList/merchantList.wxml-->
-<text>pages/merchantList/merchantList.wxml</text>
+<wxs src="../../wxs/filter.wxs" module="filter"/>
+<navbar title="商户列表" back="{{false}}" tabbar="2" isTabbar="{{true}}">
+  <view class="flex-col" style="height:100%">
+    <view class="searchHead flex-y-center">
+      <van-search class="flex-grow-1" value="{{ query.content }}" left-icon="/image/search@2x.png"
+        placeholder="检索门牌号、联系人、商户类型" bind:search="searchTap" bind:clear="searchTap" bind:change="searchTap"/>
+      <view><navigator url="/pages/merchantListForm/merchantListForm?type=0" hover-class="none">新增商户</navigator></view>
+    </view>
+    <view class="scroll">
+      <scroll-view scroll-y style="height:100%" bindscrolltolower="onReachBottom" refresher-enabled="{{true}}" refresher-threshold="{{100}}"
+		refresher-default-style="black" refresher-background="white" refresher-triggered="{{triggered}}"
+		bindrefresherrefresh="onRefresh" bindrefresherpulling="onPulling">
+        <view class="merchantList">
+          <block wx:for="{{merchantList}}" wx:for-item="merchantOne" wx:key="index">
+            <block wx:for="{{merchantOne}}" wx:key="id">
+              <view class="merchantOne">
+                <view class="merchantHead flex-y-center">
+                  门牌号:{{item.houseNo}}
+                </view>
+                <view class="merchantContent flex-wrap">
+                  <view class="merchantLeft">
+                    <view class="caseTitle">联系人:</view>
+                    <view class="caseStauts">{{item.principal}}</view>
+                  </view>
+                  <view class="merchantType">
+                    <view class="caseTitle">电话:</view>
+                    <view class="caseStauts">{{item.phone}}</view>
+                  </view>
+                  <view class="merchantLeft">
+                    <view class="caseTitle">商户类型:</view>
+                    <view class="caseStauts">{{item.merchantType}}</view>
+                  </view>
+                  <view class="merchantType">
+                    <view class="caseTitle">商户名称:</view>
+                    <view class="caseStauts">{{item.merchantName}}</view>
+                  </view>
+                  <view class="merchantLeft">
+                    <view class="caseTitle">是否有安装预处理设:</view>
+                    <view class="caseStauts">{{filter.okOrNo(item.beInstall)}}</view>
+                  </view>
+                  <view class="merchantType">
+                    <view class="caseTitle">是否办理排水许可:</view>
+                    <view class="caseStauts">{{filter.okOrNo(item.beAllow)}}</view>
+                  </view>
+                </view>
+                <navigator url="/pages/merchantListDetail/merchantListDetail?houseNo={{item.houseNo}}" hover-class="none" class="merchantFoot flex-y-center flex-x-between">
+                  <text>修改记录</text>
+                  <image src="/image/next@2x.png"></image>
+                </navigator>
+              </view>
+            </block>
+          </block>
+        </view>
+        <include src="/components/noData/noData.wxml" />
+      </scroll-view>
+    </view>
+  </view>
+</navbar>

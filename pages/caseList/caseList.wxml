@@ -1,2 +1,63 @@
 <!--pages/caseList/caseList.wxml-->
-<text>pages/caseList/caseList.wxml</text>
+<wxs src="../../wxs/filter.wxs" module="filter"/>
+<navbar tabbar="1" isTabbar="{{true}}" title="案件列表" back="{{false}}">
+  <view class="flex-col" style="height:100%">
+    <view class="caseHead flex-x-between flex-y-center">
+      <block wx:for="{{caseHead}}" wx:key="index">
+        <view class="{{query.caseStatus==item.index?'caseHeadActive':''}}" bindtap="tabChange"
+          data-index="{{item.index}}">{{item.title}}</view>
+      </block>
+    </view>
+    <view class="scroll">
+      <scroll-view scroll-y style="height:100%" bindscrolltolower="onReachBottom"  refresher-enabled="{{true}}" refresher-threshold="{{100}}"
+		refresher-default-style="black" refresher-background="white" refresher-triggered="{{triggered}}"
+		bindrefresherrefresh="onRefresh" bindrefresherpulling="onPulling">
+        <view class="caseList">
+          <block wx:for="{{caseList}}" wx:key="index" wx:for-item="caseOne">
+            <block wx:for="{{caseOne}}" wx:key="id">
+              <view class="caseOne">
+                <view class="caseCode flex-x-between">
+                  <text>案件编码: {{item.caseNo}}</text>
+                  <text class="caseStauts">{{filter.caseStatus(item.caseStatus)}}</text>
+                </view>
+                <view class="caseType flex">
+                  <view class="caseTypeOne">
+                    <view class="caseTitle">业务类型:</view>
+                    <view class="caseStauts">{{item.businessType}}</view>
+                  </view>
+                  <view class="caseTypeOne">
+                    <view class="caseTitle">是否超时:</view>
+                    <view class="caseStauts">{{filter.okOrNo(item.beTimeout)}}</view>
+                  </view>
+                </view>
+                <view class="caseType flex-x-between">
+                  <view class="caseLeft">
+                    <view class="caseTypetwo">
+                      <view class="caseTitle">设施类型:</view>
+                      <view class="caseStauts">{{item.waterType}}</view>
+                    </view>
+                    <view class="caseTypetwo">
+                      <view class="caseTitle">小区:</view>
+                      <view class="caseStauts">{{item.streetName}}</view>
+                    </view>
+                  </view>
+                  <view class="caseRight" bindtap="previewImg" data-current="{{item.questionImage}}">
+                    <image src="{{item.questionImage}}"></image>
+                  </view>
+                </view>
+                <navigator url="/pages/caseDetail/caseDetail?id={{item.id}}" hover-class="none" class="caseTime flex-x-between flex-y-center">
+                  <text>上报时间:{{item.createTime}}</text>
+                  <view class="seeDetail flex-y-center">
+                    <text>查看详情</text>
+                    <image src="/image/next@2x.png"></image>
+                  </view>
+                </navigator>
+              </view>
+            </block>
+          </block>
+        </view>
+        <include src="/components/noData/noData.wxml"/>
+      </scroll-view>
+    </view>
+  </view>
+</navbar>

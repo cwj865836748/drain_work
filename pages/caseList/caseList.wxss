@@ -1,1 +1,94 @@
 /* pages/caseList/caseList.wxss */
+@import "/components/noData/noData.wxss";
+.caseHead {
+  height: 120rpx;
+  min-height: 120rpx;
+  background: #ffffff;
+  font-size: 32rpx;
+  color: var(--c2);
+  padding: 0 40rpx;
+}
+
+.caseHeadActive {
+  position: relative;
+  color: var(--c1);
+  font-weight: bold;
+}
+
+.caseHeadActive::after {
+  content: "";
+  position: absolute;
+  bottom: -16rpx;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 56rpx;
+  height: 8rpx;
+  background: #008ffe;
+  border-radius: 2rpx;
+}
+
+.caseList {
+  padding: 30rpx;
+}
+
+.caseOne {
+  padding: 34rpx 30rpx;
+  background: #ffffff;
+  border-radius: 12rpx;
+  margin-bottom: 28rpx;
+}
+.caseOne:last-child {
+  margin-bottom: 0rpx;
+}
+.caseCode {
+  color: var(--c2);
+  padding-bottom: 26rpx;
+  border-bottom: 2rpx solid #f9f9f9;
+  margin-bottom: 24rpx;
+}
+
+.caseType {
+  margin-bottom: 22rpx;
+}
+
+.caseTypeOne {
+  flex: 1
+}
+
+.caseTypeOne:nth-child(2) {
+  width: 320rpx;
+}
+
+.caseTypetwo {
+  padding-top: 24rpx;
+}
+
+.caseTypetwo:last-child {
+  padding-top: 48rpx;
+}
+
+.caseRight>image {
+  width: 320rpx;
+  min-width: 320rpx;
+  height: 240rpx;
+  vertical-align: bottom;
+  border-radius: 8rpx;
+}
+.caseTime {
+  padding-top: 28rpx;
+  border-top: 2rpx solid #f9f9f9;
+  font-size: 26rpx;
+  color: var(--c2);
+}
+.seeDetail {
+  font-size:24rpx
+}
+.seeDetail>image {
+  width: 12rpx;
+  height: 20rpx;
+  margin-left: 10rpx;
+}
+.scroll {
+  flex:1;
+  overflow:hidden;
+}

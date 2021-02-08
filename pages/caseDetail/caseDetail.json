@@ -1,3 +1,6 @@
 {
-  "usingComponents": {}
+  "usingComponents": {
+    "navbar":"/components/navbar/navbar",
+    "van-action-sheet": "@vant/weapp/action-sheet/index"
+  }
 }

@@ -1,38 +1,111 @@
 // pages/inspectionRoute/inspectionRoute.js
+import {
+  patrol
+} from '../../request/api.js'
+import {
+  getPointsCenter
+} from '../../utils/util.js'
+const App = getApp()
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-
-    mapSetting: {
-      latitude: null,
-      longitude: null,
+    backgroundColor: "#FFF",
+    isPhoneX: false,
+    wayList: [],
+    wayShow: false,
+    wayOne: null,
+    latitude: null,
+    longitude: null,
+    markers: [],
+    polyline: [{
+      points: [],
+      color: '#008ffe', //绘制区域
+      width: 4
+    }],
+    mapSetting:{
       showLocation: true,
-      markers: [{
-        id: 0,
-        iconPath: "",
-        width: "",
-        height: "",
-        title: "",
-        latitude: 0,
-        longitude: 0
-      }],
-      polygons: [{
-        points: [] //绘制区域
-      }]
-    }
+      enablePoi:true,
+      enableBuilding:true
+    },
+    conFirmShow:false,
+    isInspection:true
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    this.getInit()
   },
-
-
+  getInit() {
+    patrol.selectWay().then(res => {
+      this.setData({
+        wayList: res.data,
+        wayOne: res.data[0],
+        isPhoneX: App.globalData.navBar.model.search('iPhone X') != -1
+      })
+      this.getMapSetting(res.data[0])
+      this.getInspection(res.data[0])
+    })
+  },
+  showSelect() {
+    this.setData({
+      wayShow: !this.data.wayShow
+    })
+  },
+  toSelect(e) {
+    const {
+      way
+    } = e.currentTarget.dataset
+    if (way.wayTitle == this.data.wayOne.wayTitle) {
+      return
+    }
+    this.setData({
+      wayOne: way
+    })
+    this.getMapSetting(way)
+    this.getInspection(way)
+    this.showSelect()
+  },
+  getMapSetting(way) {
+    const markers = way.nodeList.map(item => {
+      return {
+        ...item,
+        iconPath: "/image/addr@2x-2.png",
+        width: "51",
+        height: "52",
+      }
+    })
+    const {
+      latitude,
+      longitude
+    } = getPointsCenter(way.nodeList)
+    this.setData({
+      latitude,
+      longitude,
+      markers,
+      [`polyline[0].points`]: way.nodeList
+    })
+  },
+  getInspection(wayOne){
+    const startTime = wayOne.startTime?wayOne.startTime.replace(/-/g,'/'):''
+    const isInspection = (startTime&&new Date(startTime).getTime()<=new Date().getTime())||!startTime?true:false
+    this.setData({
+      isInspection
+    })
+  },
+  toInspection(e){
+    if(!this.data.isInspection||!this.data.wayList.length){
+      return
+    }
+    const {show:conFirmShow} = e.currentTarget.dataset
+     this.setData({
+      conFirmShow
+     })
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

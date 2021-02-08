@@ -1,5 +1,7 @@
 {
   "usingComponents": {
-    "navbar":"/components/navbar/navbar"
+    "navbar":"/components/navbar/navbar",
+    "van-overlay": "@vant/weapp/overlay/index",
+    "van-dialog": "@vant/weapp/dialog/index"
   }
 }

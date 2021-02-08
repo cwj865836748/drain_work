@@ -1,5 +1,77 @@
 /* pages/inspectionRoute/inspectionRoute.wxss */
+@import "/pages/reportProblem/reportProblem.wxss";
+.plan {
+  padding: 32rpx 30rpx 0;
+}
+.chooseLine {
+  margin-bottom: 40rpx;
+  position: relative;
+}
+.chooseLine:last-child {
+  margin-bottom: 0rpx;
+}
+.lineTitle {
+  color: var(--c2);
+  margin-bottom: 16rpx;
+}
+
+.lineSelect {
+  height: 90rpx;
+  background: #ffffff;
+  border: 2rpx solid #979797;
+  border-radius: 12rpx;
+  padding: 0 30rpx;
+  font-size: 30rpx;
+  color:var(--c1);
+  font-weight: bold;
+}
+.lineSelect>image {
+  width: 20rpx;
+  height: 12rpx;
+}
+.caseTitle {
+  font-size: 28rpx;
+}
+.caseStauts {
+  font-size: 30rpx;
+}
+.mapTitle {
+  margin-bottom: 16rpx;
+}
 map {
   width: 100%;
-  height: 300px;
+  height: 200px;
+  border-radius: 8rpx;
+  overflow: hidden;
+}
+.conFirmContent {
+  font-weight: bold;
+  height: 200rpx;
+  font-size: 32rpx;
+  color:var(--c1);
+  padding:0 30rpx;
+}
+.conFirmBtn {
+  height: 100rpx;
+  border-top: 2rpx solid #efefef;
+}
+.conFirmBtn>view {
+  font-weight: bold;
+  color:var(--c1);
+  font-size: 30rpx;
+  flex:1;
+}
+.conFirmBtn>view:last-child {
+   color:#008ffe;
+   border-left: 2rpx solid #efefef;
+}
+.conFirmBtn>view:last-child>navigator {
+  width: 100%;
+  height: 100%;
+}
+.isInspection {
+  opacity: 0.5;
+}
+.van-popup {
+  border-radius: 20rpx!important;
 }

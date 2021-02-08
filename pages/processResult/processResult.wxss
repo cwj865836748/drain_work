@@ -1,0 +1,2 @@
+/* pages/processResult/processResult.wxss */
+@import "/pages/reportProblem/reportProblem.wxss";

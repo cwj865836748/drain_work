@@ -1,1 +1,21 @@
 /* pages/inspectionDetail/inspectionDetail.wxss */
+@import "/pages/caseDetail/caseDetail.wxss";
+.caseDetailHead {
+  color:var(--c2)
+}
+.caseDetailContent {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+.mapTitle {
+  margin-bottom:16rpx;
+}
+map {
+  width: 100%;
+  height: 200px;
+  border-radius: 8rpx;
+  overflow: hidden;
+}
+.caseDetailMsg {
+  padding-bottom: 0rpx;
+}
