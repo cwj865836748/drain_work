@@ -43,6 +43,7 @@ map {
   height: 200px;
   border-radius: 8rpx;
   overflow: hidden;
+  z-index:1;
 }
 .conFirmContent {
   font-weight: bold;
@@ -74,4 +75,14 @@ map {
 }
 .van-popup {
   border-radius: 20rpx!important;
+}
+.overlay {
+  position: relative;
+}
+.overlay>cover-view {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background: rgba(0,0,0,0.5);
+  z-index: 3;
 }

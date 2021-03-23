@@ -29,7 +29,7 @@
         <view class="processCardOne">
           <view class="processCardOneHead flex-y-center">
             <image src="/image/home_icon2@2x.png" wx:if="{{!item.nodeTime}}"></image>
-            <image src="/image/home_icon1@2x.png" wx:else></image>
+            <image src="/image/success@2x.png" wx:else></image>
             <text>{{item.nodeName}}</text>
           </view>
           <block wx:if="{{!item.nodeTime}}">

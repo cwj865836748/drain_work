@@ -1,15 +1,32 @@
 // pages/caseList/caseList.js
-import {report} from '../../request/api.js'
-import {previewImage} from '../../utils/wx.js'
+import {
+  report
+} from '../../request/api.js'
+import {
+  previewImage
+} from '../../utils/wx.js'
+const App = getApp()
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    caseHead:[{index:'',title:'已报案'},{index:'0',title:'待处理'},{index:'1',title:'待评价'},{index:'2',title:'已评价'}],
-    caseList:[],
-    query:{
+    caseHead: [{
+      index: '',
+      title: '已报案'
+    }, {
+      index: '0',
+      title: '待处理'
+    }, {
+      index: '1',
+      title: '待评价'
+    }, {
+      index: '2',
+      title: '已评价'
+    }],
+    caseList: [],
+    query: {
       caseStatus: '',
       page: 1,
       pageSize: 10
@@ -24,12 +41,12 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-     options.tabIndex&&this.setData({
-      'query.caseStatus':options.tabIndex
-     })
-     this.getInit()
+    options.tabIndex && this.setData({
+      'query.caseStatus': options.tabIndex
+    })
+    this.getInit()
   },
-  getInit(){
+  getInit() {
     const {
       query,
       listQueryIndex
@@ -38,19 +55,26 @@ Page({
       this.setData({
         [`caseList[${listQueryIndex}]`]: res.data.list,
         totalPage: res.data.totalPage
-      })
+      }) 
       !this.data.caseList[0].length && this.setData({
         noData: true
       })
     })
   },
-  tabChange(e){
-    const {index}  = e.currentTarget.dataset
+  tabChange(e) {
+    const {
+      index
+    } = e.currentTarget.dataset
     this.setData({
-      'query.caseStatus':index,
-      'query.page':1,
-      listQueryIndex:0,
-      caseList:[],
+      'query.caseStatus': index,
+    })
+    this.getList()
+  },
+  getList(){
+    this.setData({
+      'query.page': 1,
+      listQueryIndex: 0,
+      caseList: [],
       noData: false
     })
     this.getInit()
@@ -65,12 +89,12 @@ Page({
     })
   },
   onPulling(e) {
-    setTimeout(()=>{
+    setTimeout(() => {
       this.setData({
         triggered: true,
       })
-    },500)
- 
+    }, 500)
+
   },
   onRefresh(e) {
     if (this._freshing) return
@@ -78,12 +102,8 @@ Page({
     setTimeout(() => {
       this.setData({
         triggered: false,
-        'query.page':1,
-        listQueryIndex:0,
-        caseList:[],
-        noData: false
       })
-      this.getInit()
+      this.getList()
       this._freshing = false
     }, 3000)
   },
@@ -98,10 +118,18 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    this.setData({
-     
-    })
-   
+    if (App.globalData.onRefresh) {
+      this.getList()
+      App.globalData.onRefresh = false
+    }
+
+    if (typeof this.getTabBar === 'function' &&
+      this.getTabBar()) {
+      this.getTabBar().setData({
+        selected: 1
+      })
+      this.getTabBar().getAuth()
+    }
   },
 
   /**

@@ -10,10 +10,12 @@
         <image src="/image/down@2x.png"></image>
       </view>
       <view class="formSelect" wx:if="{{wayShow}}">
-        <block wx:for="{{wayList}}" wx:key="index">
-          <view class="formSelectOne flex-y-center {{wayOne.wayTitle==item.wayTitle?'formSelectOneActive':''}}"
-            bindtap="toSelect" data-way="{{item}}">{{item.wayTitle}}</view>
-        </block>
+        <scroll-view scroll-y style="height:auto;max-height:360rpx;">
+          <block wx:for="{{wayList}}" wx:key="index">
+            <view class="formSelectOne flex-y-center {{wayOne.wayTitle==item.wayTitle?'formSelectOneActive':''}}"
+              bindtap="toSelect" data-way="{{item}}">{{item.wayTitle}}</view>
+          </block>
+        </scroll-view>
       </view>
     </view>
     <view class="chooseLine">
@@ -29,20 +31,28 @@
     </block>
     <block wx:else>
       <view class="chooseLine">
-        <view class="caseTitle">总时长:</view>
+        <view class="caseTitle">总时长(小时):</view>
         <view class="caseStauts">{{wayOne.totalHour}}</view>
       </view>
     </block>
+    <!-- <view class="chooseLine">
+      <view class="caseTitle mapTitle">处理时间:</view>
+      <view class="caseStauts">{{wayOne.duringTimeStr}}</view>
+    </view> -->
     <view class="chooseLine">
       <view class="caseTitle mapTitle">巡检路径:</view>
-      <map id="mapId" wx:if="{{markers.length}}" setting ="{{mapSetting}}" latitude="{{latitude}}" longitude="{{longitude}}"
-        markers="{{markers}}" polyline="{{polyline}}"></map>
+      <view class="overlay">
+        <cover-view wx:if="{{wayShow}}"></cover-view>
+        <map id="mapId" wx:if="{{markers.length}}" setting="{{mapSetting}}" latitude="{{latitude}}"
+          longitude="{{longitude}}" markers="{{markers}}" polyline="{{polyline}}"></map>
+      </view>
     </view>
     <view class="submitBtn flex-x-center {{isPhoneX?'safeBtn':''}}">
-      <view class="flex-xy-center  {{isInspection||!wayList.length?'':'isInspection'}}" bindtap="toInspection" data-show="{{true}}">开始巡检</view>
+      <view class="flex-xy-center  {{isInspection?'':'isInspection'}}" bindtap="toInspection"
+        data-show="{{true}}">开始巡检</view>
     </view>
   </view>
-  <van-overlay show="{{ wayShow }}" bind:click="showSelect" />
+  <van-overlay show="{{ wayShow }}" bind:click="showSelect" z-index="3" />
   <van-dialog use-slot show="{{ conFirmShow }}" show-confirm-button="{{false}}" bind:close="onClose" width="690rpx">
     <view class=" flex-xy-center conFirmContent">
       您当前选择的是{{wayOne.wayTitle}}

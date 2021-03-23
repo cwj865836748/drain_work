@@ -21,10 +21,21 @@ var timeFilter = function(time) {
 var timeHHssmm = function(time) {
   return time.split(' ').length==2?time.split(' ')[1]:time.split(' ')[0]
 }
+var identity = function(s) {
+  switch (parseInt(s)) {
+    case 0:
+      return '市民'
+    case 1:
+      return '巡检人员'
+    case 2:
+      return '领导'
+  }
+}
 module.exports = {
   formatNumber: formatNumber,
   okOrNo: okOrNo,
   caseStatus:caseStatus,
   timeFilter:timeFilter,
-  timeHHssmm:timeHHssmm
+  timeHHssmm:timeHHssmm,
+  identity:identity
 };

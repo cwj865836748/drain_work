@@ -14,6 +14,23 @@
     "pages/processResult/processResult",
     "pages/authWx/authWx"
   ],
+ 
+    "tabBar": {
+      "custom": true,
+      "color": "#9193a0",
+      "selectedColor": "#171a2d",
+      "backgroundColor": "#FFF",
+      "list": [{
+        "pagePath": "pages/index/index",
+        "text": "首页"
+      }, {
+        "pagePath": "pages/caseList/caseList",
+        "text": "案件"
+      }, {
+        "pagePath": "pages/merchantList/merchantList",
+        "text": "商户"
+      }]
+    },
   "window":{
     "backgroundTextStyle":"light",
     "navigationBarBackgroundColor": "#fff",

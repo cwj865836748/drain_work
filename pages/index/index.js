@@ -1,7 +1,8 @@
 // index.js
 const App = getApp()
 import {
-  common,patrol
+  common,
+  patrol
 } from '../../request/api'
 import {
   login
@@ -81,8 +82,11 @@ Page({
       encryptedData,
       iv
     } = e.detail
-    const {close} = e.currentTarget.dataset
-    if (errMsg !== 'getUserInfo:ok'||close) {
+    const {
+      close
+    } = e.currentTarget.dataset
+    if (errMsg !== 'getUserInfo:ok' || close) {
+      this.getTabBarUtil(true)
       return this.setData({
         phoneAuthShow: false
       })
@@ -91,7 +95,7 @@ Page({
       title: "正在获取",
       mask: true
     });
-    
+
     common.weChatMinLogin({
         code: this.data.wxCode,
         encryptedData,
@@ -106,17 +110,17 @@ Page({
           // user: result.data.user,
           phoneAuthShow: false,
         })
-        this.getUser()
-        !result.data.user.phone&&wx.navigateTo({
+        this.getUser() 
+        !result.data.user.phone && wx.navigateTo({
           url: '/pages/authWx/authWx',
         })
       })
   },
-  getUser(){
+  getUser() {
     Promise.all([
       common.getUserInfo(),
       common.getDisplayData()
-    ]).then(res=>{
+    ]).then(res => {
       this.setData({
         user: res[0].data,
         homeQuantity: this.data.homeQuantity.map(item => {
@@ -127,7 +131,7 @@ Page({
         })
       })
       wx.setStorageSync('user', res[0].data)
-      this.selectComponent('#navbar').getAuth()
+      this.getTabBarUtil(true)
     })
   },
   toPhone() {
@@ -151,10 +155,10 @@ Page({
       url: '/pages/inspectionList/inspectionList'
     })
   },
-  goInspectionProcess(){
-    patrol.currentPatrol().then(res=>{
+  goInspectionProcess() {
+    patrol.currentPatrol().then(res => {
       wx.navigateTo({
-        url: res.data?`/pages/inspectionProcess/inspectionProcess?wayId=${res.data.wayId}&task=1`:'/pages/inspectionRoute/inspectionRoute',
+        url: res.data ? `/pages/inspectionProcess/inspectionProcess?wayId=${res.data.wayId}&task=1` : '/pages/inspectionRoute/inspectionRoute',
       })
     })
   },
@@ -175,9 +179,19 @@ Page({
           wxCode: res.code,
           phoneAuthShow: true
         })
-      })
+        this.getTabBarUtil(false)
+      })  
   },
-
+   getTabBarUtil(status){
+    if (typeof this.getTabBar === 'function' &&
+      this.getTabBar()) {
+      this.getTabBar().setData({
+        selected: 0
+      })
+      this.getTabBar().getTabbarStatus(status)
+      this.getTabBar().getAuth()
+    }
+   },
   /**
    * 生命周期函数--监听页面隐藏
    */

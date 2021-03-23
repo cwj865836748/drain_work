@@ -31,7 +31,7 @@ Page({
       enableBuilding:true
     },
     conFirmShow:false,
-    isInspection:true
+    isInspection:false
   },
 
   /**
@@ -47,6 +47,9 @@ Page({
         wayOne: res.data[0],
         isPhoneX: App.globalData.navBar.model.search('iPhone X') != -1
       })
+      if(!res.data.length){
+        return
+      }
       this.getMapSetting(res.data[0])
       this.getInspection(res.data[0])
     })
@@ -71,12 +74,13 @@ Page({
     this.showSelect()
   },
   getMapSetting(way) {
-    const markers = way.nodeList.map(item => {
+    const markers = way.nodeList.map((item,index) => {
       return {
         ...item,
-        iconPath: "/image/addr@2x-2.png",
+        iconPath: index==0?"/image/green_un@2x.png":(index==way.nodeList.length-1?"/image/red_un@2x.png":"/image/addr@2x-2.png"),
         width: "51",
         height: "52",
+        anchor:{x: .55, y: .6}
       }
     })
     const {
@@ -91,7 +95,8 @@ Page({
     })
   },
   getInspection(wayOne){
-    const startTime = wayOne.startTime?wayOne.startTime.replace(/-/g,'/'):''
+    let startTime = wayOne.startTime?`${new Date().getFullYear()}/${new Date().getMonth()+1}/${new Date().getDate()} ${wayOne.startTime.split(' ')[1]}`
+    :''
     const isInspection = (startTime&&new Date(startTime).getTime()<=new Date().getTime())||!startTime?true:false
     this.setData({
       isInspection

@@ -59,27 +59,32 @@ Page({
         return
       }
       const wayOne = res[0].data
-      const endTime = wayOne.way.endTime?wayOne.way.endTime.replace(/-/g,'/'):''
-      const time = wayOne.way.startTime ?
-        (new Date(endTime).getTime() -
-          new Date().getTime()) : (wayOne.way.totalHour * 60 * 60 * 1000)
       this.setData({
         wayOne,
         adminPhone: res[1].data,
         isPhoneX: App.globalData.navBar.model.search('iPhone X') != -1,
-        time
+        time:wayOne.countdown*1000
       })
       this.getMapSetting()
       this.getIsDoCode()
     })
   },
   getMapSetting() {
-    const markers = this.data.wayOne.way.nodeList.map(item => {
+    const markers = this.data.wayOne.way.nodeList.map((item,index) => {
+      let iconPath = ""
+      if(index==0){
+        iconPath=item.nodeTime?"/image/green@2x.png":"/image/green_un@2x.png"
+      }else if(index==this.data.wayOne.way.nodeList.length-1){
+        iconPath=item.nodeTime?"/image/red@2x.png":"/image/red_un@2x.png"
+      }else {
+        iconPath=item.nodeTime?"/image/addr@2x-3.png":"/image/addr@2x-2.png"
+      }
       return {
         ...item,
-        iconPath: item.nodeTime?"/image/addr@2x-3.png":"/image/addr@2x-2.png",
+        iconPath,
         width: "51",
         height: "52",
+        anchor:{x: .55, y: .6}
       }
     })
     const {
@@ -99,7 +104,9 @@ Page({
     });
   },
   finished(){
-
+      this.setData({
+        [`wayOne.beTimeout`]:true
+      })
   },
   toPhone() {
     wx.makePhoneCall({
@@ -149,7 +156,7 @@ Page({
           doCodeOKorNo:true,
           confirmShow:true,
           [`wayOne.way.nodeList[${index}].nodeTime`]:nodeTime,
-          [`markers[${index}].iconPath`]:'/image/addr@2x-3.png'
+          [`markers[${index}].iconPath`]:index==0?"/image/green@2x.png":(index== this.data.wayOne.way.nodeList.length-1?"/image/red@2x.png":"/image/addr@2x-3.png")
          })
          this.getIsDoCode()
        }else if(node.code==11003){

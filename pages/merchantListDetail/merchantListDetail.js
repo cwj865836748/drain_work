@@ -12,7 +12,7 @@ Page({
     isPhoneX:false,
     merchantUpdateList: [],
     query: {
-      houseNo: '',
+      id: '',
       page: 1,
       pageSize: 10
     },
@@ -27,7 +27,7 @@ Page({
   onLoad: function (options) {
     this.setData({
       isPhoneX:App.globalData.navBar.model.search('iPhone X') != -1,
-      [`query.houseNo`]:options.houseNo
+      [`query.id`]:parseInt(options.id)
     })
   },
   getInit(){

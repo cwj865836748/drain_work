@@ -41,12 +41,21 @@ Page({
     })
   },
   getMapSetting(way) {
-    const markers = way.nodeList.map(item => {
+    const markers = way.nodeList.map((item,index) => {
+      let iconPath = ""
+      if(index==0){
+        iconPath=item.nodeTime?"/image/green@2x.png":"/image/green_un@2x.png"
+      }else if(index==way.nodeList.length-1){
+        iconPath=item.nodeTime?"/image/red@2x.png":"/image/red_un@2x.png"
+      }else {
+        iconPath=item.nodeTime?"/image/addr@2x-3.png":"/image/addr@2x-2.png"
+      }
       return {
         ...item,
-        iconPath: item.nodeTime?"/image/addr@2x-3.png":"/image/addr@2x-2.png",
+        iconPath,
         width: "51",
         height: "52",
+        anchor:{x: .55, y: .6}
       }
     })
     const {

@@ -2,7 +2,7 @@ import {
   showToast
 } from '../utils/wx'
 // 后台url
-const baseUrl = 'https://water.zyark2.com';
+const baseUrl = 'https://api.hdenv.cn';
 // const baseUrl = 'http://106.52.146.32:8092';
 // 同时发送异步代码的次数
 let ajaxTimes = 0;
@@ -35,7 +35,7 @@ export const request = (params) => {
       header: header,
       url: baseUrl + params.url,
       success: (res) => {
-        if (res.data.code == (statusCode.success|| statusCode.cardFail)) {
+        if (res.data.code == statusCode.success||res.data.code ==statusCode.cardFail) {
           resolve(res.data)
         }else if(res.data.code == statusCode.noAuth){
           setTimeout(() => {

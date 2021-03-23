@@ -44,7 +44,9 @@ Page({
       questionDescribe: ''
     },
     imgCount: 6, //可上传照片数量
-    imgList: []
+    imgList: [],
+    detailAddressShow:false,
+    questionDescribeShow:false
   },
 
   /**
@@ -62,8 +64,10 @@ Page({
         this.setData({
           businessTypeList: res[0].data,
           streetList: res[1].data,
+          'query.businessType':res[0].data[0].typeName,
           isPhoneX: App.globalData.navBar.model.search('iPhone X') != -1
         })
+        this.getWaterType(res[0].data[0].id)
       })
   },
   getWaterType(businessTypeId) {
@@ -235,13 +239,9 @@ Page({
         title: "详细地址"
       }) &&
       isNull({
-        content: questionDescribe,
-        title: "具体问题"
-      }) &&
-      isNull({
-        content: questionDescribe.length>=10,
+        content: questionDescribe.length>=1,
         title: "具体问题",
-        prompt:'不少于10个字'
+        prompt:'不少于1个字'
       }) &&
       isNull({
         content: questionImage,
@@ -265,6 +265,12 @@ Page({
   },
   move(){
 
+  },
+  focusTextarea(e){
+    const {show:key} = e.currentTarget.dataset
+     this.setData({
+         [key]:!this.data[key]
+     })
   },
   /**
    * 生命周期函数--监听页面初次渲染完成

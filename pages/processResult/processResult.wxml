@@ -1,5 +1,5 @@
 <!--pages/processResult/processResult.wxml-->
-<navbar title="提交处理结果">
+<navbar title="提交{{isForm?'巡检':'处理'}}结果">
   <view class="theForm">
     <view class="formOne">
       <view class="formTitle">{{isForm?'巡检':'维护'}}过程描述:</view>

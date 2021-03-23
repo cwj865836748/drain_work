@@ -4,7 +4,7 @@
     <view class="recordHead flex-xy-center">
       <view class="recordDoorCode flex-xy-center">
         <image src="/image/door@2x.png"></image>
-        门牌号: {{query.houseNo}}
+        门牌号: {{merchantUpdateList[0][0].houseNo}}
       </view>
     </view>
     <view class="scroll">
@@ -77,7 +77,7 @@
     </view>
     <view class="submitBtn flex-x-center {{isPhoneX?'safeBtn':''}}">
       <view class="flex-xy-center">
-        <navigator class="flex-xy-center" url="/pages/merchantListForm/merchantListForm?type=1&houseNo={{query.houseNo}}">新增修改记录</navigator>
+        <navigator class="flex-xy-center" url="/pages/merchantListForm/merchantListForm?type=1&houseNo={{merchantUpdateList[0][0].houseNo}}">新增修改记录</navigator>
       </view>
     </view>
   </view>

@@ -1,6 +1,6 @@
 <!--pages/caseList/caseList.wxml-->
 <wxs src="../../wxs/filter.wxs" module="filter"/>
-<navbar tabbar="1" isTabbar="{{true}}" title="案件列表" back="{{false}}">
+<navbar isTabbar="{{true}}" title="案件列表" back="{{false}}">
   <view class="flex-col" style="height:100%">
     <view class="caseHead flex-x-between flex-y-center">
       <block wx:for="{{caseHead}}" wx:key="index">

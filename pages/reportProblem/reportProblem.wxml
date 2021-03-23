@@ -9,7 +9,7 @@
         <image wx:else src="/image/down_un@2x.png"></image>
       </view>
       <view class="formSelect" wx:if="{{businessTypeShow}}" catchtouchmove="move">
-        <scroll-view scroll-y style="height:360rpx">
+        <scroll-view scroll-y style="height:auto;max-height:360rpx;">
           <block wx:for="{{businessTypeList}}" wx:key="index">
             <view class="formSelectOne flex-y-center {{query.businessType==item.typeName?'formSelectOneActive':''}}"
               catchtap="toSelect" data-key="businessType" data-value="{{item.typeName}}" data-configno="{{item.id}}">
@@ -26,7 +26,7 @@
         <image wx:else src="/image/down_un@2x.png"></image>
       </view>
       <view class="formSelect" wx:if="{{waterTypeShow}}" catchtouchmove="move">
-        <scroll-view scroll-y style="height:360rpx">
+        <scroll-view scroll-y style="height:auto;max-height:360rpx;">
           <block wx:for="{{waterTypeList}}" wx:key="index">
             <view class="formSelectOne flex-y-center {{query.waterType==item.waterName?'formSelectOneActive':''}}"
               catchtap="toSelect" data-key="waterType" data-value="{{item.waterName}}">{{item.waterName}}</view>
@@ -44,7 +44,7 @@
         <image wx:else src="/image/down_un@2x.png"></image>
       </view>
       <view class="formSelect" wx:if="{{streetShow}}" catchtouchmove="move">
-        <scroll-view scroll-y style="height:360rpx">
+        <scroll-view scroll-y style="height:auto;max-height:360rpx;">
           <block wx:for="{{streetList}}" wx:key="index">
             <view class="formSelectOne flex-y-center {{query.streetName==item.streetName?'formSelectOneActive':''}}"
               catchtap="toSelect" data-key="streetName" data-value="{{item.streetName}}" data-id="{{item.id}}">
@@ -62,22 +62,23 @@
     </view>
     <view class="formOne">
       <view class="formTitle">详细地址:</view>
-      <block wx:if="{{businessTypeShow||streetShow||waterTypeShow}}">
-        <view class="textareaLess">{{query.detailAddress?query.detailAddress:'请输入详细地址'}}</view>
+      <block wx:if="{{detailAddressShow}}">
+        <textarea auto-focus placeholder="请输入详细地址" placeholder-class="placeholderClass" bindinput="textareaInput"
+          data-key="detailAddress" cursor-spacing="70" fixed value="{{query.detailAddress}}" bindblur="focusTextarea" data-show="detailAddressShow"></textarea>
       </block>
       <block wx:else>
-        <textarea placeholder="请输入详细地址" placeholder-class="placeholderClass" bindinput="textareaInput"
-          data-key="detailAddress" fixed value="{{query.detailAddress}}"></textarea>
+        <view class="textareaLess {{query.detailAddress?'':'placeholderClass'}}" bindtap="focusTextarea" data-show="detailAddressShow">{{query.detailAddress?query.detailAddress:'请输入详细地址'}}</view>
       </block>
     </view>
     <view class="formOne">
       <view class="formTitle">具体问题:</view>
-      <block wx:if="{{businessTypeShow||streetShow||waterTypeShow}}">
-        <view class="textareaLess">{{query.questionDescribe?query.questionDescribe:'请输入具体问题描述供相关人员了解情况'}}</view>
+      <block wx:if="{{questionDescribeShow}}">
+        <textarea auto-focus placeholder="请输入具体问题描述供相关人员了解情况" cursor-spacing="70" placeholder-class="placeholderClass"
+          maxlength="150" bindinput="textareaInput" data-key="questionDescribe" fixed
+          value="{{query.questionDescribe}}" bindblur="focusTextarea" data-show="questionDescribeShow"></textarea>
       </block>
       <block wx:else>
-        <textarea placeholder="请输入具体问题描述供相关人员了解情况" placeholder-class="placeholderClass" maxlength="150"
-          bindinput="textareaInput" data-key="questionDescribe" fixed value="{{query.questionDescribe}}"></textarea>
+        <view class="textareaLess {{query.questionDescribe?'':'placeholderClass'}}" bindtap="focusTextarea" data-show="questionDescribeShow">{{query.questionDescribe?query.questionDescribe:'请输入具体问题描述供相关人员了解情况'}}</view>
       </block>
     </view>
     <view class="formOne" style="margin-bottom:0">

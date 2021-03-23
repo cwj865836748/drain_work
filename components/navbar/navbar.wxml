@@ -20,14 +20,3 @@
 <view wx:if="{{navbarType==2}}" class="slotContent2" style="background:{{backgroundColor}};">
   <slot></slot>
 </view>
-<van-tabbar active="{{ tabbar }}" bind:change="tabbarChange" wx:if="{{isTabbar}}">
-  <block wx:for="{{tabbarList}}" wx:key="index">
-    <van-tabbar-item wx:if="{{index != 2 || isAuth}}">
-      <image slot="icon" src="{{ item.normal }}" mode="aspectFit" style="width: 24px; height: 24px;" />
-      <image slot="icon-active" src="{{ item.active }}" mode="aspectFit" style="width: 24px; height: 24px;" />
-      <view class="tabbarTitle {{index==tabbar?'tabbarActive':''}}">
-        {{item.name}}
-      </view>
-    </van-tabbar-item>
-  </block>
-</van-tabbar>

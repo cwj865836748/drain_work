@@ -28,7 +28,7 @@
   padding-bottom: 104rpx;
 }
 .recordList {
-  padding: 0 30rpx;
+  padding: 0 30rpx 46rpx;
 }
 .recordOne {
   border-radius: 12rpx;
@@ -37,7 +37,7 @@
   padding:0 30rpx 30rpx;
 }
 .recordOne:last-child {
-  margin-bottom:46rpx;
+  margin-bottom:0rpx;
 }
 .recordOneHead {
   height:144rpx;

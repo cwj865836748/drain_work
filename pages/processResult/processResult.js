@@ -44,12 +44,11 @@ Page({
       isForm: parseInt(options.type),
       isPhoneX: App.globalData.navBar.model.search('iPhone X') != -1
     })
-    console.log(this.data.isForm)
-    parseInt(options.type)?this.setData({
-      ['query1.id']:options.id,
-      ['query1.wayId']:options.wayId
-    }):this.setData({
-      ['query0.id']:options.id
+    parseInt(options.type) ? this.setData({
+      ['query1.id']: options.id,
+      ['query1.wayId']: options.wayId
+    }) : this.setData({
+      ['query0.id']: options.id
     })
   },
   textareaInput(e) {
@@ -119,18 +118,11 @@ Page({
       let {
         resultDescribe
       } = this.data.query1
-      this.data.query1.patrolImage= this.data.imgList.join(',')
+      this.data.query1.patrolImage = this.data.imgList.join(',')
       isNull({
-          content: resultDescribe,
-          title: '维护过程描述'
-        }) && isNull({
-          content: resultDescribe.length>=10,
+          content: resultDescribe.length >= 1,
           title: "维护过程描述",
-          prompt:'不少于10个字'
-        }) &&
-        isNull({
-          content: this.data.query1.patrolImage,
-          title: '上传照片'
+          prompt: '不少于1个字'
         }) &&
         patrol.handleResult(this.data.query1).then(res => {
           this.setData({
@@ -142,27 +134,25 @@ Page({
             })
           }, 2000)
         })
-    }else {
+    } else {
       let {
         handleDescribe
       } = this.data.query0
-      this.data.query0.handleImage= this.data.imgList.join(',')
+      this.data.query0.handleImage = this.data.imgList.join(',')
       isNull({
-          content: handleDescribe,
-          title: '维护过程描述'
-        }) && isNull({
-          content: handleDescribe.length>=10,
+          content: handleDescribe.length >= 1,
           title: "维护过程描述",
-          prompt:'不少于10个字'
+          prompt: '不少于1个字'
         }) &&
         isNull({
-          content:  this.data.query0.handleImage,
+          content: this.data.query0.handleImage,
           title: '上传照片'
         }) &&
         report.handleCase(this.data.query0).then(res => {
           this.setData({
             confirmShow: true
           })
+          App.globalData.onRefresh = true
           setTimeout(() => {
             wx.navigateBack({
               delta: 1,
@@ -171,7 +161,7 @@ Page({
         })
     }
   },
-  comfirmOk(){
+  comfirmOk() {
     this.setData({
       confirmShow: false
     })

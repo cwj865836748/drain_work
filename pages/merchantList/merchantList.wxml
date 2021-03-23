@@ -1,14 +1,14 @@
 <!--pages/merchantList/merchantList.wxml-->
 <wxs src="../../wxs/filter.wxs" module="filter"/>
-<navbar title="商户列表" back="{{false}}" tabbar="2" isTabbar="{{true}}">
+<navbar title="商户列表" back="{{false}}" isTabbar="{{true}}">
   <view class="flex-col" style="height:100%">
     <view class="searchHead flex-y-center">
       <van-search class="flex-grow-1" value="{{ query.content }}" left-icon="/image/search@2x.png"
-        placeholder="检索门牌号、联系人、商户类型" bind:search="searchTap" bind:clear="searchTap" bind:change="searchTap"/>
+        placeholder="检索门牌号、联系人、商户类型、商户名称" bind:search="searchTap" bind:clear="searchTap" bind:change="searchTap"/>
       <view><navigator url="/pages/merchantListForm/merchantListForm?type=0" hover-class="none">新增商户</navigator></view>
     </view>
     <view class="scroll">
-      <scroll-view scroll-y style="height:100%" bindscrolltolower="onReachBottom" refresher-enabled="{{true}}" refresher-threshold="{{100}}"
+      <scroll-view scroll-y style="height:100%" bindscrolltolower="onReachBottom" refresher-enabled="{{true}}"
 		refresher-default-style="black" refresher-background="white" refresher-triggered="{{triggered}}"
 		bindrefresherrefresh="onRefresh" bindrefresherpulling="onPulling">
         <view class="merchantList">
@@ -44,7 +44,7 @@
                     <view class="caseStauts">{{filter.okOrNo(item.beAllow)}}</view>
                   </view>
                 </view>
-                <navigator url="/pages/merchantListDetail/merchantListDetail?houseNo={{item.houseNo}}" hover-class="none" class="merchantFoot flex-y-center flex-x-between">
+                <navigator url="/pages/merchantListDetail/merchantListDetail?id={{item.id}}" hover-class="none" class="merchantFoot flex-y-center flex-x-between">
                   <text>修改记录</text>
                   <image src="/image/next@2x.png"></image>
                 </navigator>

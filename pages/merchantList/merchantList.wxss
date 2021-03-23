@@ -23,6 +23,10 @@
   height:72rpx!important;
   padding-left:22rpx!important;
   background: #f8f8f9!important;
+  align-items: center;
+}
+.van-cell {
+  padding: 0px 10px 0px 0 !important;
 }
 .scroll {
   flex:1;

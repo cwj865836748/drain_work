@@ -2,6 +2,7 @@
 import {
   merchant
 } from '../../request/api.js'
+const App = getApp()
 Page({
 
   /**
@@ -35,7 +36,7 @@ Page({
       this.setData({
         [`merchantList[${listQueryIndex}]`]: res.data.list,
         totalPage: res.data.totalPage
-      })
+      }) 
       !this.data.merchantList[0].length && this.setData({
         noData: true
       })
@@ -54,22 +55,22 @@ Page({
     }
 
   },
-  getList(){
+  getList() {
     this.setData({
-      'query.page':1,
-      listQueryIndex:0,
-      merchantList:[],
+      'query.page': 1,
+      listQueryIndex: 0,
+      merchantList: [],
       noData: false
     })
     this.getInit()
   },
   onPulling(e) {
-    setTimeout(()=>{
+    setTimeout(() => {
       this.setData({
         triggered: true,
       })
-    },500)
- 
+    }, 1000)
+
   },
   onRefresh(e) {
     if (this._freshing) return
@@ -93,7 +94,17 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    if (App.globalData.onRefresh) {
+      this.getList()
+      App.globalData.onRefresh = false
+    }
+    if (typeof this.getTabBar === 'function' &&
+      this.getTabBar()) {
+      this.getTabBar().setData({
+        selected: 2
+      })
+      this.getTabBar().getAuth()
+    }
   },
 
   /**

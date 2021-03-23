@@ -1,5 +1,6 @@
 <!--index.wxml-->
-<navbar id="navbar" tabbar="0" isTabbar="{{true}}" title="巡检上报" navbarType="2" back="{{false}}"
+<wxs src="../../wxs/filter.wxs" module="filter"/>
+<navbar id="navbar" isTabbar="{{true}}" title="{{user.identity?'巡检上报':'问题上报'}}" navbarType="2" back="{{false}}"
   headColor="{{headColor}}" titleColor="{{titleColor}}">
   <view class="homeBg">
     <image src="/image/home_bg@2x.png"></image>
@@ -15,7 +16,7 @@
         </view>
         <view class="homeIdentity flex-y-center">
           <image src="/image/home_people@2x.png"></image>
-          <view class="position">{{user.identity?'巡检人员':'市民'}}</view>
+          <view class="position">{{filter.identity(user.identity)}}</view>
           <view class="phone">{{user.phone}}</view>
         </view>
       </view>
@@ -31,7 +32,7 @@
         </view>
       </block>
     </view>
-    <view class="homeBtn flex">
+    <view class="homeBtn flex" wx:if="{{user.identity!=2}}">
       <view class="flex-xy-center">
         <navigator class="flex-xy-center" url="/pages/reportProblem/reportProblem" hover-class="none">问题上报</navigator>
       </view>
@@ -40,14 +41,14 @@
       </view>
     </view>
   </view>
-  <movable-area class="movableArea" style="width:{{modelWidth}}px;height:{{modelHeight}}px;" wx:if="{{xZhou}}">
+  <!-- <movable-area class="movableArea" style="width:{{modelWidth}}px;height:{{modelHeight}}px;" wx:if="{{xZhou}}">
     <movable-view class="movableView" x="{{xZhou}}" y="{{yZhou}}" direction="all" animation="{{false}}">
       <view class="customerService flex-y-center flex-col" bindtap="toPhone">
         <image src="/image/tel@2x.png"></image>
         <view>热线电话</view>
       </view>
     </movable-view>
-  </movable-area>
+  </movable-area> -->
   <van-dialog use-slot show="{{ phoneAuthShow }}" width="345" showConfirmButton="{{false}}">
     <block wx:if="{{canIUse}}">
       <view class="phoneDialog">

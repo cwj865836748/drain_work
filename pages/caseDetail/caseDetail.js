@@ -47,6 +47,7 @@ Page({
     } = e.currentTarget.dataset
     comment && report.comment(this.data.evaluationQuery).then(res=>{
       this.getInit()
+      App.globalData.onRefresh=true
     })
     this.setData({
       evaluationShow: !this.data.evaluationShow

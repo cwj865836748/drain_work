@@ -29,7 +29,8 @@
       </view>
       <view class="formSelect" wx:if="{{allowShow}}">
         <block wx:for="{{allowList}}" wx:key="index">
-          <view class="formSelectOne flex-y-center {{query.beAllow==item.id?'formSelectOneActive':''}}" catchtap="toSelect" data-key="beAllow" data-value="{{item.id}}">{{item.title}}</view>
+          <view class="formSelectOne flex-y-center {{query.beAllow==item.id?'formSelectOneActive':''}}"
+            catchtap="toSelect" data-key="beAllow" data-value="{{item.id}}">{{item.title}}</view>
         </block>
       </view>
     </view>
@@ -42,21 +43,26 @@
       </view>
       <view class="formSelect" wx:if="{{installShow}}">
         <block wx:for="{{installList}}" wx:key="index">
-          <view class="formSelectOne flex-y-center {{query.beInstall==item.id?'formSelectOneActive':''}}" catchtap="toSelect" data-key="beInstall" data-value="{{item.id}}">{{item.title}}</view>
+          <view class="formSelectOne flex-y-center {{query.beInstall==item.id?'formSelectOneActive':''}}"
+            catchtap="toSelect" data-key="beInstall" data-value="{{item.id}}">{{item.title}}</view>
         </block>
       </view>
     </view>
     <view class="formOne" bindtap="showSelect" data-key="merchantTypeShow">
       <view class="formTitle">商户类型:</view>
       <view class="formContent flex-y-center">
-        <text class="{{merchantTypeWarn?'formNoWarn':''}}">{{query.merchantTypeId?query.merchantTypeId:'请选择商户类型'}}</text>
+        <text
+          class="{{merchantTypeWarn?'formNoWarn':''}}">{{query.merchantTypeId?query.merchantTypeId:'请选择商户类型'}}</text>
         <image wx:if="{{!merchantTypeWarn}}" src="/image/down@2x.png"></image>
         <image wx:else src="/image/down_un@2x.png"></image>
       </view>
       <view class="formSelect" wx:if="{{merchantTypeShow}}">
-        <block wx:for="{{merchantTypeList}}" wx:key="index">
-          <view class="formSelectOne flex-y-center {{query.merchantTypeId==item.title?'formSelectOneActive':''}}" catchtap="toSelect" data-key="merchantTypeId" data-value="{{item.title}}">{{item.title}}</view>
-        </block>
+        <scroll-view scroll-y style="height:auto;max-height:360rpx;">
+          <block wx:for="{{merchantTypeList}}" wx:key="index">
+            <view class="formSelectOne flex-y-center {{query.merchantTypeId==item.title?'formSelectOneActive':''}}"
+              catchtap="toSelect" data-key="merchantTypeId" data-value="{{item.title}}">{{item.title}}</view>
+          </block>
+        </scroll-view>
       </view>
     </view>
     <view class="formOne">

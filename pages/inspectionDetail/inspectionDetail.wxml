@@ -16,11 +16,11 @@
       </view>
       <view class="caseDetailOne">
         <view class="caseTitle">巡检总用时间:</view>
-        <view class="caseStauts">{{wayOne.duringTime}}</view>
+        <view class="caseStauts">{{wayOne.duringTimeStr}}</view>
       </view>
       <view class="caseDetailOne">
         <view class="caseTitle">是否超时:</view>
-        <view class="caseStauts">{{filter.okOrNo(wayOne.duringTime)}}</view>
+        <view class="caseStauts">{{filter.okOrNo(wayOne.beTimeout)}}</view>
       </view>
       <view class="caseDetailOne">
         <view class="caseTitle mapTitle">巡检路线:</view>
@@ -41,7 +41,7 @@
       </view>
       <view class="caseDetailOne">
         <view class="caseTitle">文字描述:</view>
-        <view class="caseStauts">{{wayOne.resultDescribe}}</view>
+        <view class="caseStauts">{{wayOne.resultDescribe?wayOne.resultDescribe:''}}</view>
       </view>
     </view>
   </view>

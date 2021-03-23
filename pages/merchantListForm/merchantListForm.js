@@ -125,6 +125,7 @@ Page({
       this.setData({
         confirmShow:true
       })
+      App.globalData.onRefresh=true
       setTimeout(()=>{
         wx.navigateBack({
           delta: 1,
