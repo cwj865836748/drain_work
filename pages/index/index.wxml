@@ -1,6 +1,6 @@
 <!--index.wxml-->
 <wxs src="../../wxs/filter.wxs" module="filter"/>
-<navbar id="navbar" isTabbar="{{true}}" title="{{user.identity?'巡检上报':'问题上报'}}" navbarType="2" back="{{false}}"
+<navbar id="navbar" isTabbar="{{true}}" title="{{filter.identityTitle(user.identity)}}" navbarType="2" back="{{false}}"
   headColor="{{headColor}}" titleColor="{{titleColor}}">
   <view class="homeBg">
     <image src="/image/home_bg@2x.png"></image>
@@ -23,7 +23,7 @@
     </view>
     <view class="homeQuantity flex-wrap">
       <block wx:for="{{homeQuantity}}" wx:key="index">
-        <view class="homeOne" wx:if="{{index!=4||user.identity}}" bindtap="goRoute" data-index="{{item.index}}">
+        <view class="homeOne" wx:if="{{filter.indexBlock(user.identity,item.include)}}" bindtap="goRoute" data-index="{{item.index}}">
           <view class="homeOneTitle flex-y-center">
             <image src="{{item.logo}}"></image>
             <text>{{item.title}}</text>
@@ -33,10 +33,10 @@
       </block>
     </view>
     <view class="homeBtn flex" wx:if="{{user.identity!=2}}">
-      <view class="flex-xy-center">
-        <navigator class="flex-xy-center" url="/pages/reportProblem/reportProblem" hover-class="none">问题上报</navigator>
+      <view class="flex-xy-center" wx:if="{{user.identity!=4}}">
+        <navigator  class="flex-xy-center" url="/pages/reportProblem/reportProblem" hover-class="none">问题上报</navigator>
       </view>
-      <view wx:if="{{user.identity}}" class="flex-xy-center" bindtap="goInspectionProcess">
+      <view wx:if="{{user.identity!=0&&user.identity!=3}}" class="flex-xy-center" bindtap="goInspectionProcess">
         去巡检
       </view>
     </view>

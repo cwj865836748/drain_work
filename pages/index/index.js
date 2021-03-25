@@ -17,42 +17,47 @@ Page({
     xZhou: 0,
     hotLine: '', //热线电话
     user: {
-      identity: 0 //判断是否是巡查人员 1
+      identity: 0 //判断是否市民0 工作巡检人员1 领导2 工作人员3 巡检人员4 管长5
     }, //用户信息
     homeQuantity: [{
         logo: "/image/home_icon5@2x.png",
         title: '已报案数量',
         num: '0',
         id: 'totalReportCase',
-        index: ''
+        index: '',
+        include:[0,1,2,3,5]
       },
       {
         logo: "/image/home_icon2@2x.png",
         title: '待处理数量',
         num: '0',
         id: 'waitHandle',
-        index: '0'
+        index: '0',
+        include:[0,1,2,3,5]
       },
       {
         logo: "/image/home_icon3@2x.png",
         title: '待评价数量',
         num: '0',
         id: 'waitComment',
-        index: '1'
+        index: '1',
+        include:[0,1,2,3,5]
       },
       {
         logo: "/image/home_icon1@2x.png",
         title: '已评价数量',
         num: '0',
         id: 'alreadyComment',
-        index: '2'
+        index: '2',
+        include:[0,1,2,3,5]
       },
       {
         logo: "/image/home_icon4@2x.png",
         title: '已巡查数量',
         num: '0',
         id: 'alreadyPatrol',
-        index: '3'
+        index: '3',
+        include:[1,2,4,5]
       }
     ]
   },

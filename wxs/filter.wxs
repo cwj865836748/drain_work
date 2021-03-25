@@ -15,27 +15,54 @@ var caseStatus = function (s) {
       return '已评价'
   }
 }
-var timeFilter = function(time) {
-  return time?time.split(' ')[1]:''
+var timeFilter = function (time) {
+  return time ? time.split(' ')[1] : ''
 }
-var timeHHssmm = function(time) {
-  return time.split(' ').length==2?time.split(' ')[1]:time.split(' ')[0]
+var timeHHssmm = function (time) {
+  return time.split(' ').length == 2 ? time.split(' ')[1] : time.split(' ')[0]
 }
-var identity = function(s) {
+var identity = function (s) {
   switch (parseInt(s)) {
     case 0:
       return '市民'
     case 1:
-      return '巡检人员'
+      return '工作人员(巡检)'
     case 2:
       return '领导'
+    case 3:
+      return '工作人员'
+    case 4:
+      return '巡检人员'
+    case 5:
+      return '管长'
   }
 }
+var identityTitle = function (s) {
+  switch (parseInt(s)) {
+    case 0:
+      return '问题上报'
+    case 1:
+      return '巡检与处理'
+    case 2:
+      return '巡检与处理'
+    case 3:
+      return '问题处理'
+    case 4:
+      return '巡检上报'
+    case 5:
+      return '巡检与处理'
+  }
+}
+var indexBlock = function (identity,block) {
+  return block.indexOf(identity)!=-1
+}
 module.exports = {
+  indexBlock:indexBlock,
   formatNumber: formatNumber,
   okOrNo: okOrNo,
-  caseStatus:caseStatus,
-  timeFilter:timeFilter,
-  timeHHssmm:timeHHssmm,
-  identity:identity
+  caseStatus: caseStatus,
+  timeFilter: timeFilter,
+  timeHHssmm: timeHHssmm,
+  identity: identity,
+  identityTitle:identityTitle
 };

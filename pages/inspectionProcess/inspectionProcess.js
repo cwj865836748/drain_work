@@ -33,7 +33,8 @@ Page({
     adminPhone: '',
     isDoCode: true,
     doCodeOKorNo: true,
-    nodeObj:null
+    nodeObj:null,
+    options:null,
   },
   /**
    * 生命周期函数--监听页面加载
@@ -63,7 +64,8 @@ Page({
         wayOne,
         adminPhone: res[1].data,
         isPhoneX: App.globalData.navBar.model.search('iPhone X') != -1,
-        time:wayOne.countdown*1000
+        time:wayOne.countdown*1000,
+        options
       })
       this.getMapSetting()
       this.getIsDoCode()
@@ -149,15 +151,16 @@ Page({
       return patrol.doNode(data)
     }).then(node => {
        if(node.code==200){
-         const index = this.data.wayOne.way.nodeList.findIndex(item=>item.id == node.data.nodeId)
+        //  const index = this.data.wayOne.way.nodeList.findIndex(item=>item.id == node.data.nodeId)
          nodeTime = nodeTime.split(' ')[1]
          this.setData({
           nodeObj:{...node.data,nodeTime},
           doCodeOKorNo:true,
           confirmShow:true,
-          [`wayOne.way.nodeList[${index}].nodeTime`]:nodeTime,
-          [`markers[${index}].iconPath`]:index==0?"/image/green@2x.png":(index== this.data.wayOne.way.nodeList.length-1?"/image/red@2x.png":"/image/addr@2x-3.png")
+          // [`wayOne.way.nodeList[${index}].nodeTime`]:nodeTime,
+          // [`markers[${index}].iconPath`]:index==0?"/image/green@2x.png":(index== this.data.wayOne.way.nodeList.length-1?"/image/red@2x.png":"/image/addr@2x-3.png")
          })
+         this.getInit(this.data.options)
          this.getIsDoCode()
        }else if(node.code==11003){
          this.setData({
