@@ -47,6 +47,7 @@ Page({
         merchantTypeList: res.data,
         type: parseInt(options.type),
         'query.houseNo':options.houseNo||'',
+        'query.id':parseInt(options.id)||'',
         isPhoneX: App.globalData.navBar.model.search('iPhone X') != -1
       })
     })

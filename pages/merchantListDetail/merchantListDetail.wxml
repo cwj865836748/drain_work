@@ -77,7 +77,7 @@
     </view>
     <view class="submitBtn flex-x-center {{isPhoneX?'safeBtn':''}}">
       <view class="flex-xy-center">
-        <navigator class="flex-xy-center" url="/pages/merchantListForm/merchantListForm?type=1&houseNo={{merchantUpdateList[0][0].houseNo}}">新增修改记录</navigator>
+        <navigator class="flex-xy-center" url="/pages/merchantListForm/merchantListForm?type=1&houseNo={{merchantUpdateList[0][0].houseNo}}&id={{query.id}}">新增修改记录</navigator>
       </view>
     </view>
   </view>

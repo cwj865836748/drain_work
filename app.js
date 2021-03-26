@@ -2,6 +2,7 @@ App({
   globalData: {
     qqKey: 'ZBRBZ-E4WC2-HA3UF-CMQPB-QKR6E-5OFVJ',
     baseUrl:'https://api.hdenv.cn'
+    // baseUrl:'http://106.52.146.32:8092'
   },
   /**
    * 当小程序初始化完成时，会触发 onLaunch（全局只触发一次）
